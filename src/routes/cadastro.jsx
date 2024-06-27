@@ -4,24 +4,32 @@ import Formulario from '../hooks/formulario';
 import { Link } from 'react-router-dom';
 import '../css/FormProduto.css'
 function Cadastro() {
+
+  
   const handleSubmit = (formData) => {
    const API_URL = 'http://localhost:8080';
     console.log('Dados do formulário:', formData);
     
-    fetch(API_URL + '/produtos', {
-     method: 'POST',
-     headers: {
-         'Content-Type': 'application/json',
-       },
-       body: JSON.stringify(formData),
-     })
-     .then(response => response.json())
-     .then(data => {
-       console.log('Resposta do servidor:', data);
-     })
-     .catch(error => {
-       console.error('Erro ao enviar dados:', error);
-     });
+    fetch(API_URL + '/food/save', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      body: JSON.stringify(formData),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Resposta do servidor:', data);
+    })
+    .catch(error => {
+      console.error('Erro ao enviar dados:', error);
+    });
   };
 
   return (

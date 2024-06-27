@@ -1,19 +1,21 @@
 // Formulario.jsx
 import React, { useState } from 'react';
+
 export function Formulario({ onSubmit }) {
-  const [name, setNome] = useState('');
-  const [quantidade, setQuantidade] = useState('');
+
+  const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
-  const [descricao, setDescricao] = useState('');
+  const [image, setimage] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit({ name: name, quantidade, price, descricao }); // Corrigido para `name` em vez de `nome`
-    // Limpar os campos após o envio, se necessário
-    setNome('');
-    setQuantidade('');
+    //quando ele enviar os dados
+    onSubmit({title, price, image });
+
+    //limpa os campos
+    setTitle('');
     setPrice('');
-    setDescricao('');
+    setimage('');
   };
 
   return (
@@ -23,22 +25,13 @@ export function Formulario({ onSubmit }) {
           Nome do Produto:
           <input
             type="text"
-            value={name}
-            onChange={(e) => setNome(e.target.value)}
+            value={title}
+            onChange= {(e) => setTitle(e.target.value)}
             required
           />
         </label>
       </div>
       <div>
-        <label>
-          Quantidade:
-          <input
-            type="number"
-            value={quantidade}
-            onChange={(e) => setQuantidade(e.target.value)}
-            required
-          />
-        </label>
       </div>
       <div>
         <label>
@@ -53,11 +46,11 @@ export function Formulario({ onSubmit }) {
       </div>
       <div>
         <label>
-          Descrição:
+          Image:
           <input
             type="text"
-            value={descricao}
-            onChange={(e) => setDescricao(e.target.value)}
+            value={image}
+            onChange={(e) => setimage(e.target.value)}
             required
           />
         </label>

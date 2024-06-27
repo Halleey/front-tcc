@@ -2,12 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
-import Home from './routes/home.jsx'
 import Cadastro from './routes/cadastro.jsx'
 //config do router
 import{
   createBrowserRouter, RouterProvider
 } from 'react-router-dom';
+import Register from './routes/Register.jsx'
+import Login from './routes/login.jsx'
 
 const router = createBrowserRouter([
 {
@@ -16,9 +17,13 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "/home",
-    element: <Home/>
+    path: "/login",
+    element: <Login/>
     },
+    {
+      path: "/register",
+      element: <Register/>
+      },
     {
       path: "/cadastro",
       element: <Cadastro/>
