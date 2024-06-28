@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useAuth } from './useAuth'; // Import the useAuth hook
+import { useAuth } from './useAuth';
 
 const API_URL = 'http://localhost:8080';
 
@@ -31,23 +31,25 @@ export function useLogin() {
             setError(err);
         } finally {
             setLoading(false);
+          
         }
     }
 
     return { loginUser, loading, error };
+
 }
 
 export function LoginForm() {
     const [name, setName] = useState("");
     const [password, setPassword] = useState("");
     const { loginUser, loading, error } = useLogin();
-    const { token } = useAuth(); // Use the useAuth hook to get the token
+    const { token } = useAuth();
 
     const submit = async (event) => {
         event.preventDefault();
         try {
             await loginUser({ name, password });
-            // Redirect or perform other actions after successful login
+            
         } catch (err) {
             console.error('Erro ao fazer login:', err);
         }
@@ -57,7 +59,7 @@ export function LoginForm() {
         <div className="login-form">
             <h2>Login</h2>
             {token ? (
-                <p>You are already logged in</p>
+                <p>You are already logged in {name}</p>
             ) : (
                 <form onSubmit={submit} className="input-container">
                     <Input label="Name" value={name} updateValue={setName} />

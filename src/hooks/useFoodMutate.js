@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from 'react-query';
-import { useAuth } from './useAuth'; // Importe sua função useAuth, se necessário
+import { useAuth } from './useAuth';
 
 const API_URL = 'http://localhost:8080';
 
@@ -25,7 +25,7 @@ const postData = async (data, token) => {
 
 export function useFoodDataMutate() {
     const queryClient = useQueryClient();
-    const { token } = useAuth(); // Certifique-se de ter uma função useAuth que retorna o token
+    const { token } = useAuth(); 
 
     const mutate = useMutation((data) => postData(data, token), {
         onSuccess: () => {

@@ -33,7 +33,7 @@ function App() {
         localStorage.removeItem('token');
         queryClient.clear();
         setIsAuthenticated(false);
-        navigate('/login'); // Use navigate para redirecionar para /login
+        navigate('/'); // Use navigate para redirecionar para /login
     };
 
     const [produtos, setProdutos] = useState([]);

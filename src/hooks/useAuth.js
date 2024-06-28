@@ -10,7 +10,6 @@ export function useAuth() {
 
     useEffect(() => {
         const storedToken = getTokenFromLocalStorage();
-        console.log("Token obtido do localStorage:", storedToken); 
         setToken(storedToken);
     }, []);
 

@@ -6,24 +6,24 @@ export function Formulario({ onSubmit }) {
   const [price, setPrice] = useState('');
   const [image, setimage] = useState('');
 
-  const mutate = useFoodDataMutate(); // Obtenha a função de mutação
+  const mutate = useFoodDataMutate(); 
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Prepare os dados para enviar
+    
     const data = {
       title,
       price,
       image
     };
 
-    // Chame a função de mutação
+   
     try {
-      await mutate.mutateAsync(data); // Executa a mutação assíncrona
-      onSubmit(data); // Chama a função de callback onSubmit, se necessário
+      await mutate.mutateAsync(data);
+      onSubmit(data);
 
-      // Limpa os campos após o envio
+    
       setTitle('');
       setPrice('');
       setimage('');
