@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 import './css/App.css';
 import Tabela from './hooks/tabela';
+import { useQueryClient } from 'react-query';
+import queryClient from './hooks/queryClient';
 
 function App() {
+    const navigate = useNavigate(); // Use useNavigate para navegação
+    const queryClient = useQueryClient();
+
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [hasProductPermission, setHasProductPermission] = useState(false);
 
@@ -23,6 +28,13 @@ function App() {
             }
         }
     }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        queryClient.clear();
+        setIsAuthenticated(false);
+        navigate('/login'); // Use navigate para redirecionar para /login
+    };
 
     const [produtos, setProdutos] = useState([]);
     const API_URL = 'http://localhost:8080';
@@ -53,10 +65,10 @@ function App() {
                         <button>Cadastrar produtos</button>
                     </Link>
                 )}
+                {isAuthenticated && <button onClick={handleLogout}>Sair</button>}
             </div>
-            <Tabela vetor={produtos} /> {}
+            <Tabela vetor={produtos} />
         </div>
     );
 }
-
 export default App;

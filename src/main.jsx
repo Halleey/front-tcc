@@ -1,37 +1,39 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import Cadastro from './routes/cadastro.jsx'
-//config do router
-import{
-  createBrowserRouter, RouterProvider
-} from 'react-router-dom';
-import Register from './routes/Register.jsx'
-import Login from './routes/login.jsx'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import { QueryClientProvider } from 'react-query';
+import queryClient from './hooks/queryClient';
+import './index.css';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Cadastro from './routes/cadastro';
+import Register from './routes/Register';
+import Login from './routes/login';
 
 const router = createBrowserRouter([
-{
-  path: "/",
-  element: <App/>
-  },
-
-  {
-    path: "/login",
-    element: <Login/>
+    {
+        path: '/',
+        element: <App />
     },
     {
-      path: "/register",
-      element: <Register/>
-      },
+        path: '/login',
+        element: <Login />
+    },
     {
-      path: "/cadastro",
-      element: <Cadastro/>
-      }
+        path: '/register',
+        element: <Register />
+    },
+    {
+        path: '/cadastro',
+        element: <Cadastro />
+    }
+]);
 
-])
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-   <RouterProvider router={router}/>
-  </React.StrictMode>,
-)
+    <React.StrictMode>
+        <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router}>
+                <App />
+            </RouterProvider>
+        </QueryClientProvider>
+    </React.StrictMode>
+);
