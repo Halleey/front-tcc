@@ -28,6 +28,7 @@ const router = createBrowserRouter([
       path: "/cadastro",
       element: <Cadastro/>
       }
+
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

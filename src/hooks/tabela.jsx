@@ -1,5 +1,3 @@
-import React, { useEffect, useState } from 'react';
-
 function Tabela({ vetor }) {
     return (
         <table>
@@ -15,9 +13,9 @@ function Tabela({ vetor }) {
                 {vetor.map((produto, indice) => (
                     <tr key={indice}>
                         <td>{produto.id}</td>
-                        <td>{produto.title}</td> {/* Ajustado para 'title' */}
-                        <td><img src={produto.image} alt={produto.title} style={{ width: '100px' }} /></td> {/* Ajustado para 'image' */}
-                        <td>{produto.price}</td> {/* Ajustado para 'price' */}
+                        <td>{produto.title}</td> {}
+                        <td><img src={produto.image} alt={produto.title} style={{ width: '300px' }} /></td> {}
+                        <td>{produto.price}</td> {}
                     </tr>
                 ))}
             </tbody>
