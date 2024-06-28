@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from './useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const API_URL = 'http://localhost:8080';
 
@@ -26,17 +27,17 @@ export function useLogin() {
             const token = data?.token;
             if (token) {
                 localStorage.setItem('token', token);
+                return true; // Retorna true para indicar sucesso no login
             }
         } catch (err) {
             setError(err);
         } finally {
             setLoading(false);
-          
         }
+        return false; // Retorna false se o login falhar
     }
 
     return { loginUser, loading, error };
-
 }
 
 export function LoginForm() {
@@ -44,12 +45,15 @@ export function LoginForm() {
     const [password, setPassword] = useState("");
     const { loginUser, loading, error } = useLogin();
     const { token } = useAuth();
+    const navigate = useNavigate();
 
     const submit = async (event) => {
         event.preventDefault();
         try {
-            await loginUser({ name, password });
-            
+            const loginSuccess = await loginUser({ name, password });
+            if (loginSuccess) {
+                navigate('/'); // Redireciona apenas se o login for bem-sucedido
+            }
         } catch (err) {
             console.error('Erro ao fazer login:', err);
         }
@@ -78,7 +82,7 @@ const Input = ({ label, value, updateValue }) => {
     return (
         <div>
             <label>{label}</label>
-            <input value={value} onChange={event => updateValue(event.target.value)}></input>
+            <input value={value} onChange={event => updateValue(event.target.value)} />
         </div>
     );
 }
