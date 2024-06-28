@@ -6,6 +6,7 @@ import Tabela from './hooks/tabela';
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [hasProductPermission, setHasProductPermission] = useState(false);
+
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (token) {
@@ -18,7 +19,6 @@ function App() {
                 setIsAuthenticated(true);
             } catch (error) {
                 console.error('Invalid token format', error);
-                // Optionally, you can handle the error, e.g., by clearing the token
                 localStorage.removeItem('token');
             }
         }
@@ -39,20 +39,22 @@ function App() {
             <h1>Home page is being built... Be patient</h1>
             <div className='btns-primary'>
                 {!isAuthenticated && (
-                    <Link to="/login">
-                        <button>Login</button>
-                    </Link>
+                    <>
+                        <Link to="/login">
+                            <button>Login</button>
+                        </Link>
+                        <Link to="/register">
+                            <button>Cadastrar-se</button>
+                        </Link>
+                    </>
                 )}
                 {isAuthenticated && hasProductPermission && (
                     <Link to="/cadastro">
                         <button>Cadastrar produtos</button>
                     </Link>
                 )}
-                <Link to="/register">
-                    <button>Cadastrar-se</button>
-                </Link>
             </div>
-            <Tabela vetor={produtos} /> {/* Passa os produtos para o componente Tabela */}
+            <Tabela vetor={produtos} /> {}
         </div>
     );
 }
