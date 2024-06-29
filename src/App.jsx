@@ -6,7 +6,7 @@ import { useQueryClient } from 'react-query';
 import queryClient from './hooks/queryClient';
 
 function App() {
-    const navigate = useNavigate(); // Use useNavigate para navegação
+    const navigate = useNavigate(); 
     const queryClient = useQueryClient();
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -33,7 +33,7 @@ function App() {
         localStorage.removeItem('token');
         queryClient.clear();
         setIsAuthenticated(false);
-        navigate('/'); // Use navigate para redirecionar para /login
+        navigate('/'); 
     };
 
     const [produtos, setProdutos] = useState([]);
