@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import RegisterHt from '../hooks/RegisterHt';
+import RegisterHt from '../components/RegisterHt'
 function Register() {
 
   const handleSubmit = (registerData) => {

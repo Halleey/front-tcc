@@ -1,6 +1,6 @@
 
 import React from 'react';
-import Formulario from '../hooks/formulario';
+import Formulario from '../components/formulario';
 import { Link } from 'react-router-dom';
 import '../css/FormProduto.css'
 function Cadastro() {

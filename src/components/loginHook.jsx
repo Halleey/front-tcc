@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './authService'; 
-import { useLogin } from './useLogin';
+import { useAuth } from '../hooks/useAuth'; 
+import { useLogin } from '../hooks/useLogin';
 
 export function LoginForm() {
     const [name, setName] = useState("");

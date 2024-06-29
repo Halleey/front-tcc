@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useFoodDataMutate } from './useFoodMutate';
+import { useFoodDataMutate } from '../hooks/useFoodMutate';
 
 export function Formulario({ onSubmit }) {
   const [title, setTitle] = useState('');

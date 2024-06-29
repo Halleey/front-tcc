@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 import './css/App.css';
-import Tabela from './hooks/tabela';
+import Tabela from './components/tabela';
 import { useQueryClient } from 'react-query';
 import queryClient from './hooks/queryClient';
 
