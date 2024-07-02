@@ -1,5 +1,7 @@
 import React from 'react';
 import { useCart } from '../hooks/CartProvider';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import styles from '../css/Tabela.module.css';
 
 function Tabela({ vetor }) {
   const { addToCart } = useCart();
@@ -9,30 +11,21 @@ function Tabela({ vetor }) {
   };
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Título</th>
-          <th>Imagem</th>
-          <th>Preço</th>
-          <th>Ações</th> {}
-        </tr>
-      </thead>
-      <tbody>
-        {vetor.map((produto, indice) => (
-          <tr key={indice}>
-            <td>{produto.id}</td>
-            <td>{produto.title}</td>
-            <td><img src={produto.image} alt={produto.title} style={{ width: '100px' }} /></td>
-            <td>{produto.price}</td>
-            <td>
-              <button onClick={() => handleAddToCart(produto)}>Adicionar ao Carrinho</button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div className={styles.cardContainer}>
+      {vetor.map((produto, indice) => (
+        <div key={indice} className={styles.card}>
+          <img src={produto.image} alt={produto.title} />
+          <div className={styles.cardBody}>
+            <h5 className={styles.cardTitle}>{produto.title}</h5>
+            <p className={styles.cardText}>Preço: {produto.price}</p>
+            <p className={styles.cardText}>{produto.description}</p>
+            <button onClick={() => handleAddToCart(produto)} className={styles.cardButton}>
+              Adicionar ao Carrinho
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
   );
 }
 

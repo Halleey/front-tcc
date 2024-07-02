@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link, BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
-import './css/App.css';
+import { Link, Routes, Route, useNavigate } from 'react-router-dom';
+import styles from './css/App.module.css'; // Usando CSS Module
 import Tabela from './components/tabela';
 import { useQueryClient } from 'react-query';
 import CartPage from './routes/CartPage';
@@ -48,9 +48,8 @@ function App() {
     }, []);
 
     return (
-        <div className="App">
-            <h1>Home page is being built... Be patient</h1>
-            <div className='btns-primary'>
+        <div className={styles.App}>
+            <div className={styles.btnsPrimary}>
                 <Link to="/cart">
                     <button>carrinho de compras</button>
                 </Link>
@@ -77,7 +76,6 @@ function App() {
             <Tabela vetor={produtos} />
             <Routes>
                 <Route path="/cart" element={<CartPage />} />
-                {}
             </Routes>
         </div>
     );

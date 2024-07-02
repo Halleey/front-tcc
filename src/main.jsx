@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import { QueryClientProvider } from 'react-query';
 import queryClient from './hooks/queryClient';
-import './index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Cadastro from './routes/cadastro';
 import Register from './routes/Register';

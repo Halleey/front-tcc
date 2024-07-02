@@ -6,6 +6,7 @@ export function Formulario({ onSubmit }) {
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
+  const [descripton, setDescripton] = useState('');
 
   const mutate = useFoodDataMutate();
   const { addToCart } = useCart();
@@ -16,7 +17,8 @@ export function Formulario({ onSubmit }) {
     const data = {
       title,
       price,
-      image
+      image,
+      descripton
     };
 
     try {
@@ -27,6 +29,7 @@ export function Formulario({ onSubmit }) {
       setTitle('');
       setPrice('');
       setImage('');
+      setDescripton('');
     } catch (error) {
       console.error('Erro ao enviar dados:', error);
     }
@@ -63,6 +66,17 @@ export function Formulario({ onSubmit }) {
             type="text"
             value={image}
             onChange={(e) => setImage(e.target.value)}
+            required
+          />
+        </label>
+      </div>
+      <div>
+        <label>
+          Descrição:
+          <input
+            type="text"
+            value={descripton}
+            onChange={(e) => setDescripton(e.target.value)}
             required
           />
         </label>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth'; 
 import { useLogin } from '../hooks/useLogin';
+import styles from '../css/Login.module.css';
 
 export function LoginForm() {
     const [name, setName] = useState("");
@@ -18,27 +19,41 @@ export function LoginForm() {
                 navigate('/');
             }
         } catch (err) {
-            console.error('Erro ao fazer login:');
+            console.error('Erro ao fazer login:', err);
         }
     };
 
     return (
-        <div className="login-form">
+        <div className={styles['login-form']}>
             <h2>Login</h2>
             {token ? (
                 <p>You are already logged in {name}</p>
             ) : (
-                <form onSubmit={submit} className="input-container">
+                <form onSubmit={submit} className={styles['input-container']}>
                     <div>
                         <label>Name</label>
-                        <input value={name} onChange={event => setName(event.target.value)} />
+                        <input
+                            type="text"
+                            value={name}
+                            onChange={(event) => setName(event.target.value)}
+                            className={styles['input']}
+                        />
                     </div>
                     <div>
                         <label>Senha</label>
-                        <input value={password} onChange={event => setPassword(event.target.value)} />
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(event) => setPassword(event.target.value)}
+                            className={styles['input']}
+                        />
                     </div>
-                    {error && <p className="error">{error.message}</p>}
-                    <button type="submit" className="btn-primary" disabled={loading}>
+                    {error && <p className={styles['error']}>{error.message}</p>}
+                    <button
+                        type="submit"
+                        className={`${styles['btn-primary']} ${loading ? styles['disabled'] : ''}`}
+                        disabled={loading}
+                    >
                         {loading ? 'Entrando...' : 'Entrar'}
                     </button>
                 </form>
