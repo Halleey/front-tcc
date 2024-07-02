@@ -18,7 +18,7 @@ export function LoginForm() {
                 navigate('/');
             }
         } catch (err) {
-            console.error('Erro ao fazer login:', err);
+            console.error('Erro ao fazer login:');
         }
     };
 

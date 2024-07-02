@@ -6,7 +6,6 @@ function Tabela({ vetor }) {
 
   const handleAddToCart = (produto) => {
     addToCart(produto);
-    alert(`${produto.title} adicionado ao carrinho!`);
   };
 
   return (
@@ -17,7 +16,7 @@ function Tabela({ vetor }) {
           <th>Título</th>
           <th>Imagem</th>
           <th>Preço</th>
-          <th>Ações</th> {/* Nova coluna para o botão */}
+          <th>Ações</th> {}
         </tr>
       </thead>
       <tbody>

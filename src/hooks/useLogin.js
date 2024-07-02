@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { login } from './authService'; // Certifique-se de que o caminho esteja correto
+import { login } from './authService';
 
 export function useLogin() {
     const [loading, setLoading] = useState(false);
