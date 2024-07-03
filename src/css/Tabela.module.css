@@ -7,10 +7,10 @@
 }
 
 .card {
-  background-color: #1a1a1a; 
-  border-radius: 10px;
+  background: linear-gradient(145deg, #e6cfcf, #221624); /* Fundo degradê */
+  border-radius: 10px; /* Bordas arredondadas */
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
   transition: transform 0.3s ease;
 }
 
@@ -25,33 +25,36 @@
   object-fit: cover;
 }
 
-.card-body {
+.cardBody {
   padding: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.card-title,
-.card-text {
+.cardTitle,
+.cardText {
   margin: 10px 0;
   text-align: center;
-  color: white; /* Texto branco para contrastar com o fundo escuro */
+  color: #d1cfcf; /* Texto preto */
+  font-size: large;
 }
 
-.card button {
+.cardButton {
   margin-top: 10px;
-  background-color: #ff4d00; /* Cor do botão */
+  background-color: #4e4be0; /* Roxo neon */
   color: white; /* Cor do texto do botão */
   border: none;
   padding: 10px 20px;
-  border-radius: 20px;
+  border-radius: 5px; /* Bordas arredondadas */
   cursor: pointer;
   font-size: 16px;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.card button:hover {
-  background-color: #ff6600; /* Cor do botão ao passar o mouse */
+.cardButton:hover {
+  background-color: #4a0e81; /* Roxo neon mais escuro ao passar o mouse */
+  box-shadow: 0 0 10px #ab3ee6; /* Sombra roxa neon ao passar o mouse */
 }
 
 @media (max-width: 768px) {

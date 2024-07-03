@@ -3,7 +3,7 @@
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 20px;
-  background: linear-gradient(to bottom, #282c34, #000000);
+  background: linear-gradient(to bottom, #1a1a1a, #000000); /* Alterado para combinar com o tema */
   color: white;
   min-height: 100vh;
   display: flex;
@@ -25,16 +25,18 @@ h1 {
 
 .btnsPrimary button {
   padding: 10px 20px;
-  background-color: #9c6005;
+  background-color: #4e4be0; 
   color: white;
   border: none;
   border-radius: 20px;
   cursor: pointer;
   font-size: 16px;
+  transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .btnsPrimary button:hover {
-  background-color: #c40404;
+  background-color: #4a0e81;
+  box-shadow: 0 0 10px #ab3ee6; 
 }
 
 @media (max-width: 768px) {
