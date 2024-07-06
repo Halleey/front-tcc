@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useCart } from '../hooks/CartProvider';
-
+import '../css/Carrinho.css';
 const CartPage = () => {
   const { cartItems, removeFromCart } = useCart();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [hasProductPermission, setHasProductPermission] = useState(false);
-  const [approvalUrl, setApprovalUrl] = useState(null); // State to store approval URL
+  const [approvalUrl, setApprovalUrl] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -50,8 +50,8 @@ const CartPage = () => {
       });
 
       if (response.data && response.data.approvalUrl) {
-        setApprovalUrl(response.data.approvalUrl); // Set the approval URL received from backend
-        // Optionally, you can log the PayPal response data here for debugging
+        setApprovalUrl(response.data.approvalUrl); 
+      
         console.log('PayPal response:', response.data);
       } else {
         setError('A resposta da API do PayPal não contém approval_url.');
@@ -78,7 +78,6 @@ const CartPage = () => {
         },
       });
       console.log('Payment executed:', response.data);
-      // Additional logic after successful payment execution
     } catch (error) {
       setError(error.message);
     }
@@ -88,21 +87,28 @@ const CartPage = () => {
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => total + item.price, 0);
   };
-
-  // Function to redirect to PayPal approval URL
-  const redirectToPayPal = () => {
+  const redirectToPayPal = async () => {
     if (approvalUrl) {
       window.location.href = approvalUrl;
+      try {
+        await axios.post('http://localhost:8080/api/paypal/payment-complete', null, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+      } catch (error) {
+        setError(error.message);
+      }
     } else {
       setError('Approval URL is not available.');
     }
   };
-
+  
   return (
-    <div>
+    <div className="container">
       <h1>Cart</h1>
-      {error && <p>Error: {error}</p>}
-      {loading && <p>Loading...</p>}
+      {error && <p className="error">Error: {error}</p>}
+      {loading && <p className="loading">Loading...</p>}
       {!isAuthenticated && <p>You need to log in to proceed.</p>}
       {hasProductPermission && <p>You have permission to access products as an admin.</p>}
       {cartItems.length === 0 ? (
@@ -119,13 +125,15 @@ const CartPage = () => {
               </li>
             ))}
           </ul>
-          <p>Total: {calculateTotal()}</p>
+          <p className="total">Total: {calculateTotal()}</p>
           <button onClick={createPayment}>Checkout with PayPal</button>
         </div>
       )}
-      <Link to="/">
-        <button>Home page</button>
-      </Link>
+      <div className="back-link">
+        <Link to="/">
+          <button>Home page</button>
+        </Link>
+      </div>
       {approvalUrl && (
         <div>
           <p>If you are not redirected automatically, click the button below:</p>
@@ -135,5 +143,4 @@ const CartPage = () => {
     </div>
   );
 };
-
 export default CartPage;

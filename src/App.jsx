@@ -49,9 +49,10 @@ function App() {
 
     return (
         <div className={styles.App}>
+            <h1>My Store</h1>
             <div className={styles.btnsPrimary}>
                 <Link to="/cart">
-                    <button>carrinho de compras</button>
+                    <button>Carrinho de Compras</button>
                 </Link>
                 {!isAuthenticated ? (
                     <>
@@ -66,7 +67,7 @@ function App() {
                     <>
                         {hasProductPermission && (
                             <Link to="/cadastro">
-                                <button>Cadastrar produtos</button>
+                                <button>Cadastrar Produtos</button>
                             </Link>
                         )}
                         <button onClick={handleLogout}>Sair</button>
