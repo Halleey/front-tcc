@@ -9,6 +9,7 @@ import Register from './routes/Register';
 import Login from './routes/login';
 import CartPage from './routes/CartPage';
 import { CartProvider } from './hooks/CartProvider';
+import PaymentCompletePage from './routes/payment-complete';
 
 const router = createBrowserRouter([
     {
@@ -30,7 +31,11 @@ const router = createBrowserRouter([
     {
         path: '/cart',
         element: <CartPage/>
-    }    
+    },
+    {
+        path: 'payment-complete',
+        element: <PaymentCompletePage/>
+    }   
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

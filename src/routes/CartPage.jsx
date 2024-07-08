@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useCart } from '../hooks/CartProvider';
 import '../css/Carrinho.css';
+
 const CartPage = () => {
   const { cartItems, removeFromCart } = useCart();
   const [loading, setLoading] = useState(false);
@@ -10,6 +11,7 @@ const CartPage = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [hasProductPermission, setHasProductPermission] = useState(false);
   const [approvalUrl, setApprovalUrl] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -42,7 +44,8 @@ const CartPage = () => {
         intent: 'sale',
         description: 'Purchase from your store',
         cancelUrl: 'http://localhost:5173/cart',
-        successUrl: 'http://localhost:5173/',
+        successUrl: 'http://localhost:5173/payment-complete', 
+        products: cartItems 
       }, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -51,7 +54,6 @@ const CartPage = () => {
 
       if (response.data && response.data.approvalUrl) {
         setApprovalUrl(response.data.approvalUrl); 
-      
         console.log('PayPal response:', response.data);
       } else {
         setError('A resposta da API do PayPal não contém approval_url.');
@@ -62,48 +64,18 @@ const CartPage = () => {
     setLoading(false);
   };
 
-  const executePayment = async (paymentId, payerId) => {
-    if (!isAuthenticated) {
-      console.error('User is not authenticated.');
-      return;
-    }
-    setLoading(true);
-    try {
-      const response = await axios.post('http://localhost:8080/api/paypal/execute-payment', {
-        paymentId,
-        payerId,
-      }, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-        },
-      });
-      console.log('Payment executed:', response.data);
-    } catch (error) {
-      setError(error.message);
-    }
-    setLoading(false);
-  };
-
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => total + item.price, 0);
   };
-  const redirectToPayPal = async () => {
+
+  const redirectToPayPal = () => {
     if (approvalUrl) {
       window.location.href = approvalUrl;
-      try {
-        await axios.post('http://localhost:8080/api/paypal/payment-complete', null, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-          },
-        });
-      } catch (error) {
-        setError(error.message);
-      }
     } else {
       setError('Approval URL is not available.');
     }
   };
-  
+
   return (
     <div className="container">
       <h1>Cart</h1>
@@ -121,12 +93,12 @@ const CartPage = () => {
                 <img src={item.image} alt={item.title} width="50" />
                 <h2>{item.title}</h2>
                 <p>{item.price}</p>
-                <button onClick={() => removeFromCart(item)}>Remove</button>
+                <button onClick={() => removeFromCart(item)}>Remover</button>
               </li>
             ))}
           </ul>
           <p className="total">Total: {calculateTotal()}</p>
-          <button onClick={createPayment}>Checkout with PayPal</button>
+          <button onClick={createPayment}>Pagar com Paypal</button>
         </div>
       )}
       <div className="back-link">
@@ -136,11 +108,12 @@ const CartPage = () => {
       </div>
       {approvalUrl && (
         <div>
-          <p>If you are not redirected automatically, click the button below:</p>
-          <button onClick={redirectToPayPal}>Proceed to PayPal</button>
+          <p>Clique abaixo para prosseguir para o pagamento</p>
+          <button onClick={redirectToPayPal}>Prosseguir para o Paypal</button>
         </div>
       )}
     </div>
   );
 };
+
 export default CartPage;
