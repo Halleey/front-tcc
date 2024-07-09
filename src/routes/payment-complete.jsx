@@ -14,7 +14,7 @@ const PaymentCompletePage = () => {
 
     const completePayment = async () => {
       try {
-        const response = await axios.post('http://localhost:8080/api/paypal/payment-complete', null, {
+        const response = await axios.patch('http://localhost:8080/api/paypal/payment-complete', null, {
           params: {
             paymentId,
             PayerID: payerId,
@@ -25,9 +25,10 @@ const PaymentCompletePage = () => {
         });
 
         if (response.data === 'Payment approved') {
-          navigate('/');
+          navigate('/'); 
         } else {
           setError('Payment not approved');
+          
         }
       } catch (error) {
         setError(error.message);
@@ -43,7 +44,7 @@ const PaymentCompletePage = () => {
 
   return (
     <div>
-      <h1>Pagamento concluído com sucesso</h1>
+      <h1>Payment Complete</h1>
       {error && <p className="error">{error}</p>}
     </div>
   );
