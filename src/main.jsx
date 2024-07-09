@@ -10,12 +10,23 @@ import Login from './routes/login';
 import CartPage from './routes/CartPage';
 import { CartProvider } from './hooks/CartProvider';
 import PaymentCompletePage from './routes/payment-complete';
+import { PasswordRecoveryForm } from './components/PasswordRecoveryForm';
+import { PasswordResetForm } from './components/PasswordReset';
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <App />
     },
+    {
+        path:'/recuperar',
+        element: <PasswordRecoveryForm/>
+    },
+    {
+        path:'/alterar',
+        element: <PasswordResetForm/>
+    },
+
     {
         path: '/login',
         element: <Login></Login>
