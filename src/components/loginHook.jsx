@@ -11,6 +11,14 @@ export function LoginForm() {
     const { token } = useAuth();
     const navigate = useNavigate();
 
+    const handleReturnHome = () => {
+        navigate('/'); 
+    };
+
+    const handleAlterPassword = () => {
+        navigate('/recuperar'); 
+    };
+
     const submit = async (event) => {
         event.preventDefault();
         try {
@@ -56,7 +64,14 @@ export function LoginForm() {
                     >
                         {loading ? 'Entrando...' : 'Entrar'}
                     </button>
+                    <button type="button" onClick={handleAlterPassword} className={styles['btn-secondary']}>
+                    Esqueceu a senha?...
+                </button>
+                    <button type="button" onClick={handleReturnHome} className={styles['btn-secondary']}>
+                    Voltar para Home
+                </button>
                 </form>
+                
             )}
         </div>
     );

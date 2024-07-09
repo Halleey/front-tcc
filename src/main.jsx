@@ -12,11 +12,16 @@ import { CartProvider } from './hooks/CartProvider';
 import PaymentCompletePage from './routes/payment-complete';
 import { PasswordRecoveryForm } from './components/PasswordRecoveryForm';
 import { PasswordResetForm } from './components/PasswordReset';
+import Pedidos from './components/CozinhaTela';
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <App />
+    },
+    {
+        path: '/pedidos',
+        element: <Pedidos/>
     },
     {
         path:'/recuperar',

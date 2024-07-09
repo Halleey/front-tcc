@@ -1,0 +1,18 @@
+.pedidos-container {
+    padding: 20px;
+}
+
+.pedidos-list {
+    list-style: none;
+    padding: 0;
+}
+
+.pedido-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.pedido-item p {
+    margin: 5px 0;
+}

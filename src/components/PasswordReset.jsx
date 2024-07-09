@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import styles from '../css/Passwordreset.module.css';
 
 export function PasswordResetForm() {
@@ -8,6 +9,7 @@ export function PasswordResetForm() {
     const [newPassword, setNewPassword] = useState("");
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
+    const navigate = useNavigate(); // Hook para navegação
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -19,6 +21,10 @@ export function PasswordResetForm() {
             setError(err.response.data);
             setMessage("");
         }
+    };
+
+    const handleReturnHome = () => {
+        navigate('/'); // Navegar de volta para a home page
     };
 
     return (
@@ -56,6 +62,9 @@ export function PasswordResetForm() {
                 {error && <p className={styles['error']}>{error}</p>}
                 <button type="submit" className={styles['btn-primary']}>
                     Alterar Senha
+                </button>
+                <button type="button" onClick={handleReturnHome} className={styles['btn-secondary']}>
+                    Voltar para Home
                 </button>
             </form>
         </div>
