@@ -16,3 +16,19 @@ export const getPedidos = async () => {
         throw error;
     }
 };
+
+export const deletePedidoById = async (pedidoId) => {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await axios.delete(`${API_URL}/${pedidoId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Erro ao excluir pedido", error);
+        throw error;
+    }
+};

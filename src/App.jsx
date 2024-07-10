@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Routes, Route, useNavigate } from 'react-router-dom';
-import styles from './css/App.module.css'; // Usando CSS Module
+import styles from './css/App.module.css';
 import Tabela from './components/tabela';
 import { useQueryClient } from 'react-query';
 import CartPage from './routes/CartPage';
@@ -12,6 +12,7 @@ function App() {
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [hasProductPermission, setHasProductPermission] = useState(false);
+    const [hasPedidosPermission, setHasPedidoPermission] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -21,6 +22,7 @@ function App() {
                 const role = payload.role;
                 if (role === 'ADMIN') {
                     setHasProductPermission(true);
+                    setHasPedidoPermission(true);
                 }
                 setIsAuthenticated(true);
             } catch (error) {
@@ -68,6 +70,11 @@ function App() {
                         {hasProductPermission && (
                             <Link to="/cadastro">
                                 <button>Cadastrar Produtos</button>
+                            </Link>
+                        )}
+                        {hasPedidosPermission && (
+                            <Link to="/pedidos">
+                                <button>Ver pedidos</button>
                             </Link>
                         )}
                         <button onClick={handleLogout}>Sair</button>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getPedidos } from '../hooks/Cozinha.js';
+import { getPedidos, deletePedidoById } from '../hooks/Cozinha'; 
 import styles from '../css/Cozinha.module.css';
 
 const Pedidos = () => {
@@ -22,6 +22,20 @@ const Pedidos = () => {
         fetchPedidos();
     }, []);
 
+    const handleDelete = async (pedidoId) => {
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                throw new Error("Usuário não autenticado");
+            }
+
+            await deletePedidoById(pedidoId);
+            setPedidos(pedidos.filter(pedido => pedido.id !== pedidoId));
+        } catch (err) {
+            setError("Erro ao excluir pedido");
+        }
+    };
+
     if (loading) {
         return <p>Carregando pedidos...</p>;
     }
@@ -41,6 +55,7 @@ const Pedidos = () => {
                         <p><strong>Preço:</strong> {pedido.price}</p>
                         <p><strong>Nome do cliente:</strong> {pedido.userName}</p>
                         <p><strong>Endereço:</strong> {pedido.userAddress}</p>
+                        <button onClick={() => handleDelete(pedido.id)}>Excluir</button>
                     </li>
                 ))}
             </ul>
