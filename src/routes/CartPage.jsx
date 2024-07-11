@@ -5,12 +5,14 @@ import { useCart } from '../hooks/CartProvider';
 import '../css/Carrinho.css';
 
 const CartPage = () => {
-  const { cartItems, removeFromCart } = useCart();
+  const { cartItems, removeFromCart, clearCart } = useCart();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [hasProductPermission, setHasProductPermission] = useState(false);
   const [approvalUrl, setApprovalUrl] = useState(null);
+  const [addresses, setAddresses] = useState([]);
+  const [selectedAddress, setSelectedAddress] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,6 +25,7 @@ const CartPage = () => {
           setHasProductPermission(true);
         }
         setIsAuthenticated(true);
+        fetchAddresses(token); // Fetch addresses when authenticated
       } catch (error) {
         console.error('Invalid token format', error);
         localStorage.removeItem('token');
@@ -30,23 +33,30 @@ const CartPage = () => {
     }
   }, []);
 
-  const getUserIdFromToken = () => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      try {
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        return payload.userId; // Assuming userId is part of your token payload
-      } catch (error) {
-        console.error('Invalid token format', error);
-        localStorage.removeItem('token');
-      }
+  const fetchAddresses = async (token) => {
+    try {
+      const response = await axios.get('http://localhost:8080/public/addresses', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setAddresses(response.data);
+    } catch (error) {
+      console.error('Error fetching addresses', error);
     }
-    return null;
+  };
+
+  const handleAddressChange = (e) => {
+    setSelectedAddress(e.target.value);
   };
 
   const createPayment = async () => {
     if (!isAuthenticated) {
       console.error('User is not authenticated.');
+      return;
+    }
+    if (!selectedAddress) {
+      setError('Please select an address');
       return;
     }
     setLoading(true);
@@ -60,7 +70,8 @@ const CartPage = () => {
         cancelUrl: 'http://localhost:5173/cart',
         successUrl: 'http://localhost:5173/payment-complete',
         userId: getUserIdFromToken(), // Call getUserIdFromToken to get userId
-        cartItems: cartItems // Enviar os itens do carrinho
+        cartItems: cartItems, // Enviar os itens do carrinho
+        address: selectedAddress // Enviar o endereço selecionado
       }, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -68,7 +79,7 @@ const CartPage = () => {
       });
 
       if (response.data && response.data.approvalUrl) {
-        setApprovalUrl(response.data.approvalUrl); 
+        setApprovalUrl(response.data.approvalUrl);
         console.log('PayPal response:', response.data);
       } else {
         setError('A resposta da API do PayPal não contém approval_url.');
@@ -113,6 +124,15 @@ const CartPage = () => {
             ))}
           </ul>
           <p className="total">Total: {calculateTotal()}</p>
+          <div>
+            <label htmlFor="address-select">Select Address:</label>
+            <select id="address-select" value={selectedAddress} onChange={handleAddressChange}>
+              <option value="">Choose an address</option>
+              {addresses.map((address) => (
+                <option key={address.id} value={address.id}>{address.street}, {address.city}, {address.state}</option>
+              ))}
+            </select>
+          </div>
           <button onClick={createPayment}>Checkout with PayPal</button>
         </div>
       )}

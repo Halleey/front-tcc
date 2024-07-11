@@ -13,6 +13,7 @@ import PaymentCompletePage from './routes/payment-complete';
 import { PasswordRecoveryForm } from './components/PasswordRecoveryForm';
 import { PasswordResetForm } from './components/PasswordReset';
 import Pedidos from './components/CozinhaTela';
+import AddressRegistrationPage from './components/Address';
 
 const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
     {
         path: '/cart',
         element: <CartPage/>
+    },
+    {
+        path: '/address',
+        element: <AddressRegistrationPage/>
     },
     {
         path: 'payment-complete',

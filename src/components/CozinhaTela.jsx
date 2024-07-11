@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getPedidos, deletePedidoById } from '../hooks/Cozinha'; 
 import styles from '../css/Cozinha.module.css';
-
+import { Link, Routes, Route, useNavigate } from 'react-router-dom';
 const Pedidos = () => {
     const [pedidos, setPedidos] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -56,6 +56,9 @@ const Pedidos = () => {
                         <p><strong>Nome do cliente:</strong> {pedido.userName}</p>
                         <p><strong>Endereço:</strong> {pedido.userAddress}</p>
                         <button onClick={() => handleDelete(pedido.id)}>Excluir</button>
+                        <Link to="/">
+                            <button>Home page</button>
+                        </Link>
                     </li>
                 ))}
             </ul>
