@@ -6,7 +6,7 @@ export function Formulario({ onSubmit }) {
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
-  const [descripton, setDescripton] = useState('');
+  const [description, setDescription] = useState('');
 
   const mutate = useFoodDataMutate();
   const { addToCart } = useCart();
@@ -18,7 +18,7 @@ export function Formulario({ onSubmit }) {
       title,
       price,
       image,
-      descripton
+      description
     };
 
     try {
@@ -75,8 +75,8 @@ export function Formulario({ onSubmit }) {
           Descrição:
           <input
             type="text"
-            value={descripton}
-            onChange={(e) => setDescripton(e.target.value)}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             required
           />
         </label>

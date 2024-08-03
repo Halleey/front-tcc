@@ -19,7 +19,7 @@ h1 {
 
 .btnsPrimary {
   display: flex;
-  flex-direction: column;
+  flex-direction: row; /* Altere para row para exibir botões lado a lado */
   gap: 10px;
   margin-bottom: 20px;
   align-items: center;
@@ -43,7 +43,7 @@ h1 {
 
 @media (max-width: 768px) {
   .btnsPrimary {
-    flex-direction: column;
+    flex-direction: column; /* Mantenha a disposição vertical em telas menores */
   }
 
   .btnsPrimary button {
