@@ -55,6 +55,7 @@ const Pedidos = () => {
                         <p><strong>Preço:</strong> {pedido.price}</p>
                         <p><strong>Nome do cliente:</strong> {pedido.userName}</p>
                         <p><strong>Endereço:</strong> {pedido.userAddress}</p>
+                        <p><strong>Numero:</strong> {pedido.userNumber}</p>
                         <div className={styles['pedido-actions']}>
                             <button onClick={() => handleDelete(pedido.id)}>Excluir</button>
                             <Link to="/">
