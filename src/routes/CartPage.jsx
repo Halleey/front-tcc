@@ -11,8 +11,6 @@ const CartPage = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [hasProductPermission, setHasProductPermission] = useState(false);
   const [approvalUrl, setApprovalUrl] = useState(null);
-  const [addresses, setAddresses] = useState([]);
-  const [selectedAddress, setSelectedAddress] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -27,7 +25,6 @@ const CartPage = () => {
           setHasProductPermission(true);
         }
         setIsAuthenticated(true);
-        fetchAddresses(userId);
       } catch (error) {
         console.error('Invalid token format', error);
         localStorage.removeItem('token');
@@ -35,33 +32,9 @@ const CartPage = () => {
     }
   }, []);
 
-  const fetchAddresses = async (userId) => {
-    try {
-      const response = await axios.get('http://localhost:8080/public/address', {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-          userId: userId
-        },
-      });
-      console.log('Fetched addresses:', response.data);
-      setAddresses(response.data);
-    } catch (error) {
-      console.error('Error fetching addresses', error);
-      setError('Failed to fetch addresses. Please try again later.');
-    }
-  };
-
-  const handleAddressChange = (e) => {
-    setSelectedAddress(e.target.value);
-  };
-
   const createPayment = async () => {
     if (!isAuthenticated) {
       console.error('User is not authenticated.');
-      return;
-    }
-    if (!selectedAddress) {
-      setError('Please select an address');
       return;
     }
     const getUserIdFromToken = () => {
@@ -89,8 +62,7 @@ const CartPage = () => {
         cancelUrl: 'http://localhost:5173/cart',
         successUrl: 'http://localhost:5173/payment-complete',
         userId: getUserIdFromToken(), 
-        cartItems: cartItems, 
-        address: selectedAddress 
+        cartItems: cartItems
       }, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -143,17 +115,6 @@ const CartPage = () => {
             ))}
           </ul>
           <p className="total">Total: {calculateTotal()}</p>
-          <div>
-            <label htmlFor="address-select">Select Address:</label>
-            <select id="address-select" value={selectedAddress} onChange={handleAddressChange}>
-              <option value="">Choose an address</option>
-              {addresses.map((address) => (
-                <option key={address.id} value={address.id}>
-                  {address.address}, {address.numero}
-                </option>
-              ))}
-            </select>
-          </div>
           <button onClick={createPayment}>Checkout with PayPal</button>
         </div>
       )}
