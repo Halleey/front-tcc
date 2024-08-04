@@ -50,10 +50,6 @@ const router = createBrowserRouter([
         element: <CartPage/>
     },
     {
-        path: '/address',
-        element: <AddressRegistrationPage/>
-    },
-    {
         path: 'payment-complete',
         element: <PaymentCompletePage/>
     }   

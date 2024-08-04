@@ -12,7 +12,7 @@ const CartPage = () => {
   const [hasProductPermission, setHasProductPermission] = useState(false);
   const [approvalUrl, setApprovalUrl] = useState(null);
   const [addresses, setAddresses] = useState([]);
-  const [selectedAddress, setSelectedAddress] = useState(null);
+  const [selectedAddress, setSelectedAddress] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,11 +21,13 @@ const CartPage = () => {
       try {
         const payload = JSON.parse(atob(token.split('.')[1]));
         const role = payload.role;
+        const userId = payload.userId;
+
         if (role === 'ADMIN') {
           setHasProductPermission(true);
         }
         setIsAuthenticated(true);
-        fetchAddresses(token); // Fetch addresses when authenticated
+        fetchAddresses(userId);
       } catch (error) {
         console.error('Invalid token format', error);
         localStorage.removeItem('token');
@@ -33,16 +35,19 @@ const CartPage = () => {
     }
   }, []);
 
-  const fetchAddresses = async (token) => {
+  const fetchAddresses = async (userId) => {
     try {
-      const response = await axios.get('http://localhost:8080/public/addresses', {
+      const response = await axios.get('http://localhost:8080/public/address', {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          userId: userId
         },
       });
+      console.log('Fetched addresses:', response.data);
       setAddresses(response.data);
     } catch (error) {
       console.error('Error fetching addresses', error);
+      setError('Failed to fetch addresses. Please try again later.');
     }
   };
 
@@ -59,6 +64,20 @@ const CartPage = () => {
       setError('Please select an address');
       return;
     }
+    const getUserIdFromToken = () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const payload = JSON.parse(atob(token.split('.')[1]));
+          return payload.userId; 
+        } catch (error) {
+          console.error('Invalid token format', error);
+          return null;
+        }
+      }
+      return null;
+    };
+    
     setLoading(true);
     try {
       const response = await axios.post('http://localhost:8080/api/paypal/create-payment', {
@@ -69,15 +88,15 @@ const CartPage = () => {
         description: 'Purchase from your store',
         cancelUrl: 'http://localhost:5173/cart',
         successUrl: 'http://localhost:5173/payment-complete',
-        userId: getUserIdFromToken(), // Call getUserIdFromToken to get userId
-        cartItems: cartItems, // Enviar os itens do carrinho
-        address: selectedAddress // Enviar o endereço selecionado
+        userId: getUserIdFromToken(), 
+        cartItems: cartItems, 
+        address: selectedAddress 
       }, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
-
+  
       if (response.data && response.data.approvalUrl) {
         setApprovalUrl(response.data.approvalUrl);
         console.log('PayPal response:', response.data);
@@ -89,7 +108,7 @@ const CartPage = () => {
     }
     setLoading(false);
   };
-
+  
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => total + parseFloat(item.price), 0).toFixed(2);
   };
@@ -129,7 +148,9 @@ const CartPage = () => {
             <select id="address-select" value={selectedAddress} onChange={handleAddressChange}>
               <option value="">Choose an address</option>
               {addresses.map((address) => (
-                <option key={address.id} value={address.id}>{address.street}, {address.city}, {address.state}</option>
+                <option key={address.id} value={address.id}>
+                  {address.address}, {address.numero}
+                </option>
               ))}
             </select>
           </div>

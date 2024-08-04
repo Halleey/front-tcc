@@ -1,18 +1,52 @@
 .pedidos-container {
     padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .pedidos-list {
     list-style: none;
     padding: 0;
+    margin: 0;
 }
 
 .pedido-item {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; /* Alinha os itens verticalmente */
 }
 
 .pedido-item p {
     margin: 5px 0;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.pedido-item p strong {
+    color: #333;
+}
+
+.pedido-actions {
+    margin-top: 10px; /* Adiciona um espaço acima das ações */
+}
+
+button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin-right: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
 }
