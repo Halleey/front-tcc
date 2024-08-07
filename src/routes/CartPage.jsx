@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useCart } from '../hooks/CartProvider';
-import '../css/Carrinho.css';
+import styles from '../css/CartPage.module.css';
 
 const CartPage = () => {
   const { cartItems, removeFromCart, clearCart } = useCart();
@@ -37,12 +37,13 @@ const CartPage = () => {
       console.error('User is not authenticated.');
       return;
     }
+
     const getUserIdFromToken = () => {
       const token = localStorage.getItem('token');
       if (token) {
         try {
           const payload = JSON.parse(atob(token.split('.')[1]));
-          return payload.userId; 
+          return payload.userId;
         } catch (error) {
           console.error('Invalid token format', error);
           return null;
@@ -50,7 +51,7 @@ const CartPage = () => {
       }
       return null;
     };
-    
+
     setLoading(true);
     try {
       const response = await axios.post('http://localhost:8080/api/paypal/create-payment', {
@@ -61,14 +62,14 @@ const CartPage = () => {
         description: 'Purchase from your store',
         cancelUrl: 'http://localhost:5173/cart',
         successUrl: 'http://localhost:5173/payment-complete',
-        userId: getUserIdFromToken(), 
+        userId: getUserIdFromToken(),
         cartItems: cartItems
       }, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
-  
+
       if (response.data && response.data.approvalUrl) {
         setApprovalUrl(response.data.approvalUrl);
         console.log('PayPal response:', response.data);
@@ -80,7 +81,7 @@ const CartPage = () => {
     }
     setLoading(false);
   };
-  
+
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => total + parseFloat(item.price), 0).toFixed(2);
   };
@@ -93,11 +94,16 @@ const CartPage = () => {
     }
   };
 
+  const handleRemoveFromCart = (itemId) => {
+    console.log('Removing item with ID:', itemId);
+    removeFromCart(itemId);
+  };
+
   return (
-    <div className="container">
+    <div className={styles.container}>
       <h1>Cart</h1>
-      {error && <p className="error">Error: {error}</p>}
-      {loading && <p className="loading">Loading...</p>}
+      {error && <p className={styles.error}>Error: {error}</p>}
+      {loading && <p className={styles.loading}>Loading...</p>}
       {!isAuthenticated && <p>You need to log in to proceed.</p>}
       {hasProductPermission && <p>You have permission to access products as an admin.</p>}
       {cartItems.length === 0 ? (
@@ -105,20 +111,20 @@ const CartPage = () => {
       ) : (
         <div>
           <ul>
-            {cartItems.map((item, index) => (
-              <li key={index}>
-                <img src={item.image} alt={item.title} width="50" />
-                <h2>{item.title}</h2>
-                <p>{item.price}</p>
-                <button onClick={() => removeFromCart(item)}>Remove</button>
-              </li>
-            ))}
-          </ul>
-          <p className="total">Total: {calculateTotal()}</p>
-          <button onClick={createPayment}>Checkout with PayPal</button>
+          {cartItems.map((item) => (
+          <li key={item.id}>
+            <img src={item.image} alt={item.title} width="50" />
+            <h2>{item.title}</h2>
+            <p>{item.price}</p>
+            <button onClick={() => handleRemoveFromCart(item.id)}>Remove</button>
+          </li>
+        ))}
+        </ul>
+          <p className={styles.total}>Total: {calculateTotal()}</p>
+          <button className={styles.checkoutButton} onClick={createPayment}>Checkout with PayPal</button>
         </div>
       )}
-      <div className="back-link">
+      <div className={styles.backLink}>
         <Link to="/">
           <button>Home page</button>
         </Link>
@@ -126,7 +132,7 @@ const CartPage = () => {
       {approvalUrl && (
         <div>
           <p>Click below to proceed to payment</p>
-          <button onClick={redirectToPayPal}>Proceed to PayPal</button>
+          <button className={styles.checkoutButton} onClick={redirectToPayPal}>Proceed to PayPal</button>
         </div>
       )}
     </div>

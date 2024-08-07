@@ -1,0 +1,109 @@
+/* Estilos para o corpo da página */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2c3e50;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ddd;
+    padding: 15px 10px;
+    background-color: #fafafa;
+  }
+  
+  li img {
+    margin-right: 15px;
+    border-radius: 4px;
+    width: 60px;
+    height: auto;
+  }
+  
+  li h2 {
+    font-size: 16px;
+    margin: 0;
+    color: #2c3e50;
+  }
+  
+  li p {
+    margin: 0;
+    color: #555;
+  }
+  
+  li button {
+    background-color: #27ae60;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+  }
+  
+  li button:hover {
+    background-color: #219150;
+  }
+  
+  .total {
+    margin-top: 20px;
+    font-size: 18px;
+    text-align: right;
+    color: #e67e22;
+  }
+  
+  .checkoutButton {
+    background-color: #c9370b;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-top: 20px;
+  }
+  
+  .checkoutButton:hover {
+    background-color: #c4632c;
+  }
+  
+  .error {
+    color: #e74c3c;
+    margin-top: 10px;
+  }
+  
+  .loading {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .backLink {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .backLink button {
+    background-color: #3498db;
+    padding: 10px 20px;
+  }
+  
+  .backLink button:hover {
+    background-color: #2980b9;
+  }
+  

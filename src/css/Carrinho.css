@@ -1,29 +1,33 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #f7f9fc; /* Cor de fundo mais suave */
+  background-color: #f7f9fc;
   margin: 0;
   padding: 0;
+}c4632c
+.container button {
+  background-color: #c9370b; 
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-top: 20px; 
 }
 
-.container {
-  max-width: 800px;
-  margin: 20px auto;
-  background-color: #fff;
-  padding: 30px; /* Aumentado para mais espaço interno */
-  border-radius: 10px; /* Cantos mais arredondados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra mais suave */
+.container button:hover {
+  background-color: #c4632c; 
 }
-
 h1 {
   text-align: center;
   margin-bottom: 20px;
-  color: #2c3e50; /* Cor de texto mais neutra */
+  color: #2c3e50; 
 }
 
 ul {
   list-style-type: none;
   padding: 0;
-  margin: 0; /* Remover margens para uma melhor apresentação */
+  margin: 0; /
 }
 
 li {
@@ -31,32 +35,32 @@ li {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid #ddd;
-  padding: 15px 10px; /* Maior espaço interno */
-  background-color: #fafafa; /* Cor de fundo mais suave para itens da lista */
+  padding: 15px 10px; 
+  background-color: #fafafa; 
 }
 
 li img {
-  margin-right: 15px; /* Maior espaçamento entre imagem e texto */
+  margin-right: 15px;
   border-radius: 4px;
-  width: 60px; /* Tamanho fixo para imagens */
-  height: auto; /* Mantém a proporção da imagem */
+  width: 60px; 
+  height: auto; 
 }
 
 li h2 {
-  font-size: 16px; /* Tamanho de fonte reduzido para uma melhor leitura */
+  font-size: 16px;
   margin: 0;
-  color: #2c3e50; /* Cor de texto mais neutra */
+  color: #2c3e50; 
 }
 
 li p {
   margin: 0;
-  color: #555; /* Cor de texto mais suave para parágrafos */
+  color: #555; 
 }
 
 li button {
-  background-color: #27ae60; /* Cor mais suave e agradável */
+  background-color: #27ae60; 
   color: white;
-  padding: 8px 15px; /* Maior espaçamento interno */
+  padding: 8px 15px;
   border: none;
   cursor: pointer;
   border-radius: 4px;
@@ -64,33 +68,33 @@ li button {
 }
 
 li button:hover {
-  background-color: #219150; /* Cor de hover mais escura */
+  background-color: #219150;
 }
 
 .total {
   margin-top: 20px;
   font-size: 18px;
   text-align: right;
-  color: #e67e22; /* Cor de destaque */
+  color: #e67e22; 
 }
 
 button {
-  background-color: #3498db; /* Cor de fundo mais suave */
+  background-color: #3498db; 
   color: white;
-  padding: 12px 20px; /* Maior espaçamento interno */
+  padding: 12px 20px;
   border: none;
   cursor: pointer;
   border-radius: 4px;
   font-size: 16px;
-  margin-top: 20px; /* Maior separação dos elementos */
+  margin-top: 20px; 
 }
 
 button:hover {
-  background-color: #2980b9; /* Cor de hover mais escura */
+  background-color: #2980b9; 
 }
 
 .error {
-  color: #e74c3c; /* Cor de erro mais suave */
+  color: #e74c3c; 
   margin-top: 10px;
 }
 
@@ -105,20 +109,81 @@ button:hover {
 }
 
 .back-link button {
-  background-color: #3498db; /* Cor de fundo consistente com os outros botões */
-  padding: 10px 20px; /* Maior espaçamento interno */
+  background-color: #3498db; 
+  padding: 10px 20px;
 }
 
 .back-link button:hover {
-  background-color: #2980b9; /* Cor de hover mais escura */
+  background-color: #2980b9; 
 }
 
 ul, li {
-  padding-left: 0; /* Remover padding extra */
-  padding-right: 0; /* Remover padding extra */
+  padding-left: 0; 
+  padding-right: 0; 
 }
 
 p {
   margin: 10px 0;
 }
 
+
+.login-form {
+  width: 300px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-form h2 {
+  text-align: center;
+  color: #333333;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input-container label {
+  color: #555555;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.input-container input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.input-container input:focus {
+  border-color: #573b8a;
+  box-shadow: 0 0 5px rgba(87, 59, 138, 0.5);
+}
+
+.error {
+  color: #ff0000;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.btn-primary {
+  background-color: #573b8a;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: #6d44b8;
+}

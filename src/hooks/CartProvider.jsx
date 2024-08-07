@@ -13,9 +13,21 @@ export const CartProvider = ({ children }) => {
     setCartItems([...cartItems, item]);
   };
 
-  const removeFromCart = (item) => {
-    setCartItems(cartItems.filter(cartItem => cartItem.id !== item.id));
+  const removeFromCart = (itemId) => {
+    console.log('Removing one unit of item with ID:', itemId);
+    setCartItems(prevItems => {
+      const indexToRemove = prevItems.findIndex(item => item.id === itemId);
+      if (indexToRemove !== -1) {
+        // Remove apenas a primeira ocorrência do item com o ID fornecido
+        const updatedItems = [...prevItems];
+        updatedItems.splice(indexToRemove, 1);
+        console.log('Updated cart items:', updatedItems);
+        return updatedItems;
+      }
+      return prevItems;
+    });
   };
+  
 
   const clearCart = () => {
     setCartItems([]);
