@@ -52,7 +52,11 @@ const router = createBrowserRouter([
     {
         path: 'payment-complete',
         element: <PaymentCompletePage/>
-    }   
+    },
+    {
+        path: '/endereco',
+        element:<AddressRegistrationPage/>
+    }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

@@ -1,0 +1,65 @@
+/* AddressServicePage.module.css */
+
+.addressServiceContainer {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .formGroup {
+    margin-bottom: 15px;
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .button:hover {
+    background-color: #0056b3;
+  }
+  
+  .error {
+    color: red;
+  }
+  
+  .success {
+    color: green;
+  }
+  
+  .listItem {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .removeButton {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin-left: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .removeButton:hover {
+    background-color: #c82333;
+  }
+  

@@ -51,7 +51,7 @@ function App() {
 
     return (
         <div className={styles.App}>
-            <h1>My Store</h1>
+            <h1>Mesa digital</h1>
             <div className={styles.btnsPrimary}>
                 <Link to="/cart">
                     <button>Carrinho de Compras</button>

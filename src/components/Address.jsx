@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../css/Address.css';
-  const AddressServicePage = () => {
+import styles from '../css/Endereco.module.css';
+const AddressServicePage = () => {
   const [address, setAddress] = useState('');
   const [number, setNumber] = useState('');
   const [error, setError] = useState(null);
@@ -76,33 +76,34 @@ import '../css/Address.css';
   };
 
   return (
-    <div className="address-service-container">
-      <h1>Address Service</h1>
-      {error && <p className="error">{error}</p>}
-      {success && <p className="success">{success}</p>}
-      <div className="form-group">
-        <label>Address</label>
+    <div className={styles.addressServiceContainer}>
+      <h1>Registrar endereço</h1>
+      {error && <p className={styles.error}>{error}</p>}
+      {success && <p className={styles.success}>{success}</p>}
+      <div className={styles.formGroup}>
+        <label className={styles.label}>Endereço</label>
         <input
+          className={styles.input}
           type="text"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
         />
       </div>
-      <div className="form-group">
-        <label>Number</label>
+      <div className={styles.formGroup}>
+        <label className={styles.label}>Numero</label>
         <input
+          className={styles.input}
           type="text"
           value={number}
           onChange={(e) => setNumber(e.target.value)}
         />
       </div>
-      <button onClick={handleRegisterAddress}>Register Address</button>
-      <h2>Registered Addresses</h2>
+      <button className={styles.button} onClick={handleRegisterAddress}>Salvar endereço</button>
       <ul>
         {addresses.map((addr, index) => (
-          <li key={index}>
+          <li key={index} className={styles.listItem}>
             {addr.address} - {addr.number}
-            <button onClick={() => handleRemoveAddress(addr.address, addr.number)}>Remove</button>
+            <button className={styles.removeButton} onClick={() => handleRemoveAddress(addr.address, addr.number)}>Remove</button>
           </li>
         ))}
       </ul>

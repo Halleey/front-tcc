@@ -11,10 +11,18 @@
   text-align: center;
 }
 
+@keyframes colorChange {
+  0% { color: #ff6347; } /* Tomate */
+  25% { color: #ff4500; } /* Laranja avermelhado */
+  50% { color: #ffd700; } /* Dourado */
+  75% { color: #32cd32; } /* Verde limão */
+  100% { color: #4682b4; } /* Azul aço */
+}
+
 h1 {
   font-size: 2em;
   margin: 20px 0;
-  color: #e67e22; 
+  animation: colorChange 5s infinite; /* Alterna cores a cada 5 segundos */
 }
 
 .btnsPrimary {

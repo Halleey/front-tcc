@@ -18,7 +18,6 @@ export const CartProvider = ({ children }) => {
     setCartItems(prevItems => {
       const indexToRemove = prevItems.findIndex(item => item.id === itemId);
       if (indexToRemove !== -1) {
-        // Remove apenas a primeira ocorrência do item com o ID fornecido
         const updatedItems = [...prevItems];
         updatedItems.splice(indexToRemove, 1);
         console.log('Updated cart items:', updatedItems);
