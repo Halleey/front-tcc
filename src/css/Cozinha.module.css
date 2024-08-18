@@ -19,7 +19,7 @@
     background-color: #fff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     display: flex;
-    flex-direction: column; /* Alinha os itens verticalmente */
+    flex-direction: initial;
 }
 
 .pedido-item p {
@@ -33,7 +33,7 @@
 }
 
 .pedido-actions {
-    margin-top: 10px; /* Adiciona um espaço acima das ações */
+    margin-top: 10px; 
 }
 
 button {
