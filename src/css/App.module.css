@@ -54,10 +54,17 @@ h1 {
 
 .btnsPrimary select {
   padding: 10px;
-  background-color: #34495e;
+  background-color: #6a09ac; /* Altere para a cor desejada */
   color: white;
+  border: 1px solid #ccc; /* Adiciona uma borda para consistência */
   border-radius: 20px;
   font-size: 16px;
+  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+}
+
+.btnsPrimary select:focus {
+  background-color: #6b7986; /* Cor de fundo ao focar, para destacar o campo */
+  border-color: #7a0bad; /* Borda de foco, para visual feedback */
 }
 
 @media (max-width: 1024px) {

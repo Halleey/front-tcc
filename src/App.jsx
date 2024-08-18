@@ -97,7 +97,8 @@ function App() {
             <div className={styles.btnsPrimary}>
                 <div>
                     <label>
-                        Categoria Geral:
+                         <strong>Categoria Geral:</strong>
+                        
                         <select
                             value={categoriaGeral}
                             onChange={(e) => setCategoriaGeral(e.target.value)}
@@ -111,7 +112,7 @@ function App() {
                 </div>
                 <div>
                     <label>
-                        Categoria:
+                        <strong>Categoria:</strong>
                         <select
                             value={categoria}
                             onChange={(e) => setCategoria(e.target.value)}
