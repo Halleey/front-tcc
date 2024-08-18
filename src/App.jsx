@@ -13,6 +13,11 @@ function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [hasProductPermission, setHasProductPermission] = useState(false);
     const [hasPedidosPermission, setHasPedidoPermission] = useState(false);
+    const [produtos, setProdutos] = useState([]);
+    const [categoriaGeral, setCategoriaGeral] = useState('');
+    const [categoria, setCategoria] = useState('');
+
+    const API_URL = 'http://localhost:8080';
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -32,6 +37,13 @@ function App() {
         }
     }, []);
 
+    useEffect(() => {
+        fetch(API_URL + '/food')
+            .then(response => response.json())
+            .then(data => setProdutos(data))
+            .catch(error => console.error('Erro ao buscar dados da API:', error));
+    }, []);
+
     const handleLogout = () => {
         localStorage.removeItem('token');
         queryClient.clear();
@@ -39,15 +51,14 @@ function App() {
         navigate('/');
     };
 
-    const [produtos, setProdutos] = useState([]);
-    const API_URL = 'http://localhost:8080';
-
-    useEffect(() => {
-        fetch(API_URL + '/food')
+    const handleSearch = () => {
+        const url = `${API_URL}/food?categoriaGeral=${categoriaGeral}&categoria=${categoria}`;
+        fetch(url)
             .then(response => response.json())
             .then(data => setProdutos(data))
             .catch(error => console.error('Erro ao buscar dados da API:', error));
-    }, []);
+            console.log(data);
+    };
 
     return (
         <div className={styles.App}>
@@ -81,6 +92,54 @@ function App() {
                     </>
                 )}
             </div>
+
+            {/* Dropdown de Busca */}
+            <div className={styles.btnsPrimary}>
+                <div>
+                    <label>
+                        Categoria Geral:
+                        <select
+                            value={categoriaGeral}
+                            onChange={(e) => setCategoriaGeral(e.target.value)}
+                        >
+                            <option value="">Selecione</option>
+                            <option value="salgado">Salgado</option>
+                            <option value="doce">Doce</option>
+                            <option value="bebida">Bebida</option>
+                        </select>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Categoria:
+                        <select
+                            value={categoria}
+                            onChange={(e) => setCategoria(e.target.value)}
+                            disabled={!categoriaGeral} // Desativa até que categoriaGeral seja selecionada
+                        >
+                            <option value="">Selecione</option>
+                            {categoriaGeral === 'salgado' && (
+                                <>
+                                    <option value="lanches">Lanches</option>
+                                    <option value="pizzas">Pizzas</option>
+                                </>
+                            )}
+                            {categoriaGeral === 'doce' && (
+                                <>
+                                    <option value="pizzas">Pizzas</option>
+                                </>
+                            )}
+                            {categoriaGeral === 'bebida' && (
+                                <>
+                                    <option value="bebidas">Todas as Bebidas</option>
+                                </>
+                            )}
+                        </select>
+                    </label>
+                </div>
+                <button onClick={handleSearch}>Buscar</button>
+            </div>
+
             <Tabela vetor={produtos} />
             <Routes>
                 <Route path="/cart" element={<CartPage />} />
