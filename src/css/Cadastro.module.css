@@ -1,0 +1,42 @@
+.container {
+    padding: 20px;
+    background-color: #1e1e1e; 
+    color: #e0e0e0;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #e0e0e0;
+  }
+  
+  .intro {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .footer {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .navegar {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .navegar button {
+    background-color: #6200ea;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .navegar button:hover {
+    box-shadow: 0 0 10px #6200ea;
+  }
+  

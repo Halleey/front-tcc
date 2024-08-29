@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useFoodDataMutate } from '../hooks/useFoodMutate';
 import { useCart } from '../hooks/CartProvider';
+import styles from '../css/FormProduto.module.css'; 
 
 export function Formulario({ onSubmit }) {
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState('');
   const [description, setDescription] = useState('');
-  const [categoriaGeral, setCategoriaGeral] = useState('salgado'); // Valor padrão
-  const [categoria, setCategoria] = useState('lanches'); // Valor padrão
+  const [categoriaGeral, setCategoriaGeral] = useState('salgado'); 
+  const [categoria, setCategoria] = useState('lanches'); 
 
   const mutate = useFoodDataMutate();
   const { addToCart } = useCart();
@@ -43,7 +44,7 @@ export function Formulario({ onSubmit }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className={styles.form}>
       <div>
         <label>
           Nome do Produto:
