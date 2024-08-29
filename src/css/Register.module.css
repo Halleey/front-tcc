@@ -1,0 +1,51 @@
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #1c1c1c;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  color: #e0e0e0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.heading {
+  text-align: center;
+  font-size: 24px;
+  color: #e0e0e0;
+  margin-bottom: 20px;
+}
+
+.base {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.base h3 {
+  font-size: 18px;
+  color: #e0e0e0;
+}
+
+.navegar {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.navegar button {
+  background-color: #6200ea;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: box-shadow 0.3s ease;
+}
+
+.navegar button:hover {
+  box-shadow: 0 0 10px #6200ea;
+}
+
+.navegar a {
+  text-decoration: none;
+}

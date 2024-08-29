@@ -39,7 +39,7 @@ export function LoginForm() {
             ) : (
                 <form onSubmit={submit} className={styles['input-container']}>
                     <div>
-                        <label>Name</label>
+                    <label style={{ color: '#ffffff' }}>Name</label>
                         <input
                             type="text"
                             value={name}
@@ -48,7 +48,7 @@ export function LoginForm() {
                         />
                     </div>
                     <div>
-                        <label>Senha</label>
+                    <label style={{ color: '#ffffff' }}>Senha</label>
                         <input
                             type="password"
                             value={password}
@@ -65,13 +65,12 @@ export function LoginForm() {
                         {loading ? 'Entrando...' : 'Entrar'}
                     </button>
                     <button type="button" onClick={handleAlterPassword} className={styles['btn-secondary']}>
-                    Esqueceu a senha?...
-                </button>
+                        Esqueceu a senha?...
+                    </button>
                     <button type="button" onClick={handleReturnHome} className={styles['btn-secondary']}>
-                    Voltar para Home
-                </button>
+                        Voltar para Home
+                    </button>
                 </form>
-                
             )}
         </div>
     );
