@@ -14,7 +14,7 @@ import styles from '../css/CartPage.module.css';
     const navigate = useNavigate();
   
     useEffect(() => {
-      // Verifique se o usuário está autenticado e se tem permissões
+    
       const token = localStorage.getItem('token');
       if (token) {
         try {

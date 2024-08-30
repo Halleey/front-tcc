@@ -128,6 +128,7 @@ function App() {
                             {categoriaGeral === 'doce' && (
                                 <>
                                     <option value="pizzas">Pizzas</option>
+                                   <option value ="afins"> afins</option>
                                 </>
                             )}
                             {categoriaGeral === 'bebida' && (
