@@ -3,45 +3,100 @@
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    background: #fff;
+    border-radius: 8px;
+    background: #f3f0ff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    color: black;
+}
+
+.recovery-form h2 {
+    font-weight: bold;
+    color: #4b0082;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .input-container {
     display: flex;
     flex-direction: column;
+    gap: 15px;
 }
 
 .input {
-    padding: 10px;
-    margin: 10px 0;
+    padding: 12px;
+    margin: 0;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 6px;
+    background: #fff;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+}
+
+.input:focus {
+    border-color: #8a2be2;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.25);
 }
 
 .btn-primary {
-    padding: 10px;
-    background-color: #007bff;
+    padding: 12px;
+    background: linear-gradient(45deg, #8a2be2, #4b0082);
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(45deg, #4b0082, #8a2be2);
+    transform: translateY(-2px);
+}
+
+.btn-primary:active {
+    background: linear-gradient(45deg, #4b0082, #6a0dad);
+    transform: translateY(1px);
+}
+
+.btn-secondary {
+    padding: 12px;
+    background: #f3f0ff;
+    color: #8a2be2;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background: #e6e0ff;
+    transform: translateY(-2px);
+}
+
+.btn-secondary:active {
+    background: #d1c4e9;
+    transform: translateY(1px);
 }
 
 .message {
     margin: 10px 0;
-    padding: 10px;
-    background-color: #d4edda;
+    padding: 12px;
+    background: #d4edda;
     color: #155724;
     border: 1px solid #c3e6cb;
-    border-radius: 4px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .error {
     margin: 10px 0;
-    padding: 10px;
-    background-color: #f8d7da;
+    padding: 12px;
+    background: #f8d7da;
     color: #721c24;
     border: 1px solid #f5c6cb;
-    border-radius: 4px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

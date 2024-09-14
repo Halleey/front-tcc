@@ -11,6 +11,8 @@ export function Formulario({ onSubmit }) {
   const [categoriaGeral, setCategoriaGeral] = useState('salgado'); 
   const [categoria, setCategoria] = useState('lanches'); 
 
+
+  
   const mutate = useFoodDataMutate();
   const { addToCart } = useCart();
 
