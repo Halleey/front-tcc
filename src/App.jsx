@@ -43,7 +43,7 @@ function App() {
             .then(data => setProdutos(data))
             .catch(error => console.error('Erro ao buscar dados da API:', error));
     }, []);
-
+        
     const handleLogout = () => {
         localStorage.removeItem('token');
         queryClient.clear();
