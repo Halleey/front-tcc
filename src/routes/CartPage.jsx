@@ -11,6 +11,9 @@ const CartPage = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [hasProductPermission, setHasProductPermission] = useState(false);
   const [approvalUrl, setApprovalUrl] = useState(null);
+  const [showAddressInputs, setShowAddressInputs] = useState(false); 
+  const [address, setAddress] = useState(''); 
+  const [number, setNumber] = useState(''); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -52,6 +55,7 @@ const CartPage = () => {
 
     setLoading(true);
     try {
+      console.log('dados enviados', {address, number});
       const response = await axios.post('http://localhost:8080/api/paypal/create-payment', {
         total: calculateTotal(),
         currency: 'BRL',
@@ -62,6 +66,8 @@ const CartPage = () => {
         successUrl: 'http://localhost:5173/payment-complete',
         userId: getUserIdFromToken(),
         cartItems: cartItems,
+        address, 
+        number,   
       }, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -95,13 +101,18 @@ const CartPage = () => {
     removeFromCart(itemId);
   };
 
+
+  const toggleAddressInputs = () => {
+    setShowAddressInputs((prev) => !prev);
+  };
+
   return (
     <div className={styles.container}>
       <h1>Cart</h1>
       {error && <p className={styles.error}>Error: {error}</p>}
       {loading && <p className={styles.loading}>Loading...</p>}
       {!isAuthenticated && <p>You need to log in to proceed.</p>}
-      {hasProductPermission && <p>Você é um ADMIN da página *-*.</p>}
+      {hasProductPermission && <p>Lembre-se que está usando a conta de admin...</p>}
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
@@ -116,8 +127,31 @@ const CartPage = () => {
               </li>
             ))}
           </ul>
+
           <p className={styles.total}>Total: {calculateTotal()}</p>
           <button className={styles.checkoutButton} onClick={createPayment}>Pagar com PayPal</button>
+          
+          
+          <button className={styles.addressButton} onClick={toggleAddressInputs}>
+            Tem um endereço diferente?
+          </button>
+
+          {showAddressInputs && (
+            <div className={styles.addressInputs}>
+              <input
+                type="text"
+                placeholder="Endereço"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Número"
+                value={number}
+                onChange={(e) => setNumber(e.target.value)}
+              />
+            </div>
+          )}
         </div>
       )}
       <div className={styles.backLink}>
