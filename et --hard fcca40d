@@ -1,0 +1,38 @@
+[33mad83440[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m optional address loading
+[33mfcca40d[m address cart
+[33m721a9e2[m mudanças na tela de pedidos
+[33ma4b4599[m css edit for recovery password page
+[33mbc1ff4f[m ?
+[33me6a8108[m css
+[33mba508ac[m css for login
+[33mfb8f678[m css
+[33m0f1163b[m css
+[33mbc9da50[m css
+[33m6b02b59[m filter
+[33m360893f[m css
+[33me0a63b5[m fixed bug in cart
+[33m1ba59ce[m  functions disable
+[33md045a91[m additional kitchen details
+[33m62e7c7d[m css
+[33m8809fbb[m small tweak in css
+[33mfac5f1f[m Insert address
+[33me19856f[m excluindo pedidos
+[33maa109d0[m exibindo pedido dos clientes
+[33m0365edd[m password recovery and change
+[33mefe600b[m persist cart items
+[33m93c1830[m updating pay table status
+[33me00278a[m css
+[33m082d8c7[m  Paypal payment setup complete
+[33m3050d1b[m css
+[33m63042c4[m  login page css
+[33me62c32b[m persist cart itens in localStorage
+[33m4ae7847[m cart itens
+[33m14cc3cf[m separating the packages
+[33m8a17698[m Separating responsibilities
+[33mf0f024b[m  redirect login sucesssuccessfully
+[33m6c90a17[m test
+[33mce9259d[m loggout service and redirect
+[33m3088297[m  renderização condicional
+[33m20d99b4[m login state
+[33m714ebb2[m new forms and register page
+[33m9e68aae[m initial commit
