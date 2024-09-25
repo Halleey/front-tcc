@@ -7,18 +7,18 @@ function RegisterHt({ onSubmit }) {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
-  const [numero, setNumero] = useState('');
+  const [number, setNumber] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit({ name, lastName, password, email, address });
+    onSubmit({ name, lastName, password, email, address, number });
     
     setName('');
     setLastName('');
     setEmail('');
     setPassword('');
     setAddress('');
-    setNumero('');
+    setNumber('');
   };
 
   return (
@@ -69,8 +69,8 @@ function RegisterHt({ onSubmit }) {
           Número:
           <input
             type='text'
-            value={numero}
-            onChange={(e) => setNumero(e.target.value)}
+            value={number}
+            onChange={(e) => setNumber(e.target.value)}
           />
         </label>
         <button type='submit'>Enviar</button>

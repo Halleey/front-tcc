@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getPedidos, deletePedidoById } from '../hooks/Cozinha';
+import { getPedidos, getAlternativePedido, deletePedidoById } from '../hooks/Cozinha';
 import styles from '../css/Cozinha.module.css';
 import { Link } from 'react-router-dom';
 
@@ -11,22 +11,47 @@ const Pedidos = () => {
     useEffect(() => {
         const fetchPedidos = async () => {
             try {
-                const data = await getPedidos();
-                const groupedPedidos = data.reduce((acc, pedido) => {
-                    const cliente = pedido.userName;
-                    if (!acc[cliente]) {
-                        acc[cliente] = [];
-                    }
-                    acc[cliente].push(pedido);
-                    return acc;
-                }, {});
+               
+                const optionalData = await getAlternativePedido();
                 
-                setPedidosAgrupados(groupedPedidos);
-                setLoading(false);
+                const defaultData = await getPedidos();
+
+             
+                const combinedData = [...optionalData, ...defaultData];
+                agruparPedidos(combinedData);
             } catch (err) {
-                setError("Erro ao carregar pedidos");
+                setError("Erro ao carregar pedidos.");
+            } finally {
                 setLoading(false);
             }
+        };
+
+        const agruparPedidos = (data) => {
+            const groupedPedidos = {};
+            const uniquePedidoIds = new Set(); // Para evitar duplicações
+
+            data.forEach(pedido => {
+                if (!uniquePedidoIds.has(pedido.id)) {
+                    uniquePedidoIds.add(pedido.id); // Adiciona o ID do pedido ao conjunto
+
+                    const cliente = pedido.userName;
+                    if (!groupedPedidos[cliente]) {
+                        groupedPedidos[cliente] = [];
+                    }
+
+                 
+                    const userAddress = pedido.optionalAddress ? pedido.optionalAddress : pedido.userAddress;
+                    const userNumber = pedido.optionalNumber ? pedido.optionalNumber : pedido.userNumber;
+
+                    groupedPedidos[cliente].push({
+                        ...pedido,
+                        userAddress,
+                        userNumber
+                    });
+                }
+            });
+
+            setPedidosAgrupados(groupedPedidos);
         };
 
         fetchPedidos();
@@ -69,12 +94,12 @@ const Pedidos = () => {
             <ul className={styles['pedidos-list']}>
                 {Object.keys(pedidosAgrupados).map((cliente) => (
                     <div key={cliente}>
-                        <h3>Cliente: {cliente}</h3> {/* Aqui está o nome do cliente */}
+                        <h3>Cliente: {cliente}</h3> 
                         {pedidosAgrupados[cliente].map((pedido) => (
                             <li key={pedido.id} className={styles['pedido-item']}>
                                 <p><strong>Título:</strong> {pedido.title}</p>
                                 <p><strong>Preço:</strong> {pedido.price}</p>
-                                <p><strong>Nome do Cliente:</strong> {pedido.userName}</p> {/* Exiba o nome do cliente aqui */}
+                                <p><strong>Nome do Cliente:</strong> {pedido.userName}</p> 
                                 <p><strong>Endereço:</strong> {pedido.userAddress}</p>
                                 <p><strong>Número:</strong> {pedido.userNumber}</p>
                                 <div className={styles['pedido-actions']}>

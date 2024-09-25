@@ -12,8 +12,8 @@ const CartPage = () => {
   const [hasProductPermission, setHasProductPermission] = useState(false);
   const [approvalUrl, setApprovalUrl] = useState(null);
   const [showAddressInputs, setShowAddressInputs] = useState(false); 
-  const [address, setAddress] = useState(''); 
-  const [number, setNumber] = useState(''); 
+  const [optionalAddress, setOptionalAddress] = useState(''); 
+  const [optionalNumber, setOptionalNumber] = useState(''); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -55,7 +55,7 @@ const CartPage = () => {
 
     setLoading(true);
     try {
-      console.log('dados enviados', {address, number});
+      console.log('dados enviados', {optionalAddress, optionalNumber});
       const response = await axios.post('http://localhost:8080/api/paypal/create-payment', {
         total: calculateTotal(),
         currency: 'BRL',
@@ -66,8 +66,9 @@ const CartPage = () => {
         successUrl: 'http://localhost:5173/payment-complete',
         userId: getUserIdFromToken(),
         cartItems: cartItems,
-        address, 
-        number,   
+        optionalAddress, 
+        optionalNumber,   
+        
       }, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -132,7 +133,7 @@ const CartPage = () => {
           <button className={styles.checkoutButton} onClick={createPayment}>Pagar com PayPal</button>
           
           
-          <button className={styles.addressButton} onClick={toggleAddressInputs}>
+          <button className={styles.addressButtozn} onClick={toggleAddressInputs}>
             Tem um endereço diferente?
           </button>
 
@@ -141,14 +142,14 @@ const CartPage = () => {
               <input
                 type="text"
                 placeholder="Endereço"
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                value={optionalAddress}
+                onChange={(e) => setOptionalAddress(e.target.value)}
               />
               <input
                 type="text"
                 placeholder="Número"
-                value={number}
-                onChange={(e) => setNumber(e.target.value)}
+                value={optionalNumber}
+                onChange={(e) => setOptionalNumber(e.target.value)}
               />
             </div>
           )}
