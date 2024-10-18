@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styles from '../css/Registerht.module.css'; // Importa o CSS Module
+import styles from '../css/Registerht.module.css'; 
 
 function RegisterHt({ onSubmit }) {
   const [name, setName] = useState('');
@@ -8,10 +8,12 @@ function RegisterHt({ onSubmit }) {
   const [email, setEmail] = useState('');
   const [address, setAddress] = useState('');
   const [number, setNumber] = useState('');
+  const [city, setCity] = useState('');
+  const [reference, setReference] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit({ name, lastName, password, email, address, number });
+    onSubmit({ name, lastName, password, email, address, number, city, reference });
     
     setName('');
     setLastName('');
@@ -19,6 +21,8 @@ function RegisterHt({ onSubmit }) {
     setPassword('');
     setAddress('');
     setNumber('');
+    setCity('');
+    setReference('');
   };
 
   return (
@@ -73,6 +77,24 @@ function RegisterHt({ onSubmit }) {
             onChange={(e) => setNumber(e.target.value)}
           />
         </label>
+        <label style={{ color: '#ffffff' }}>
+          Cidade:
+          <input
+            type='text'
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+        </label>
+        <label style={{ color: '#ffffff' }}>
+          Referência:
+          <input
+            type='text'
+            value={reference}
+            onChange={(e) => setReference(e.target.value)}
+          />
+        </label>
+
+
         <button type='submit'>Enviar</button>
       </form>
     </div>

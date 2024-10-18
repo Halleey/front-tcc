@@ -99,9 +99,11 @@ const Pedidos = () => {
                             <li key={pedido.id} className={styles['pedido-item']}>
                                 <p><strong>Título:</strong> {pedido.title}</p>
                                 <p><strong>Preço:</strong> {pedido.price}</p>
-                                <p><strong>Nome do Cliente:</strong> {pedido.userName}</p> 
+                                <p><strong>Nome do Cliente:</strong> {pedido.userName}</p>
                                 <p><strong>Endereço:</strong> {pedido.userAddress}</p>
                                 <p><strong>Número:</strong> {pedido.userNumber}</p>
+
+                                
                                 <div className={styles['pedido-actions']}>
                                     <button onClick={() => handleDelete(pedido.id)}>Excluir</button>
                                 </div>
@@ -115,6 +117,6 @@ const Pedidos = () => {
             </ul>
         </div>
     );
-};
+}    
 
 export default Pedidos;

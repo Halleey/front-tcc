@@ -5,7 +5,6 @@ import Tabela from './components/tabela';
 import { useQueryClient } from 'react-query';
 import CartPage from './routes/CartPage';
 import { CartProvider } from './hooks/CartProvider';
-
 function App() {
     const navigate = useNavigate();
     const queryClient = useQueryClient();
@@ -43,7 +42,7 @@ function App() {
             .then(data => setProdutos(data))
             .catch(error => console.error('Erro ao buscar dados da API:', error));
     }, []);
-        
+
     const handleLogout = () => {
         localStorage.removeItem('token');
         queryClient.clear();
@@ -57,7 +56,6 @@ function App() {
             .then(response => response.json())
             .then(data => setProdutos(data))
             .catch(error => console.error('Erro ao buscar dados da API:', error));
-            console.log(data);
     };
 
     return (
@@ -142,7 +140,9 @@ function App() {
                 <button onClick={handleSearch}>Buscar</button>
             </div>
 
-            <Tabela vetor={produtos} />
+            {/* Passando a prop isAdmin para o componente Tabela */}
+            <Tabela vetor={produtos} isAdmin={hasProductPermission} />
+
             <Routes>
                 <Route path="/cart" element={<CartPage />} />
             </Routes>

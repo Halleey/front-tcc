@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import RegisterHt from '../components/RegisterHt';
-import styles from '../css/Register.module.css'; // Importa o CSS Module
+import styles from '../css/Register.module.css'; 
 
 function Register() {
 
