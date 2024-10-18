@@ -20,7 +20,7 @@ const postData = async (data, token) => {
         throw new Error(errorMessage);
     }
 
-    return await response.json();
+    return await response.text();
 };
 
 export function useFoodDataMutate() {

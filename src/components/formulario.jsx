@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useFoodDataMutate } from '../hooks/useFoodMutate';
-import { useCart } from '../hooks/CartProvider';
 import styles from '../css/FormProduto.module.css'; 
 
 export function Formulario({ onSubmit }) {
@@ -11,39 +10,38 @@ export function Formulario({ onSubmit }) {
   const [categoriaGeral, setCategoriaGeral] = useState('salgado'); 
   const [categoria, setCategoria] = useState('lanches'); 
 
-
-  
   const mutate = useFoodDataMutate();
-  const { addToCart } = useCart();
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const data = {
-      title,
-      price,
-      image,
-      description,
-      categoriaGeral,
-      categoria,
+        title,
+        price,
+        image,
+        description,
+        categoriaGeral,
+        categoria,
     };
 
-    try {
-      await mutate.mutateAsync(data);
-      onSubmit(data);
-      addToCart(data);
+    console.log('Dados a serem submetidos:', data);  // Debug dos dados a serem submetidos
 
-      // Reset dos campos
-      setTitle('');
-      setPrice('');
-      setImage('');
-      setDescription('');
-      setCategoriaGeral('salgado');
-      setCategoria('lanches');
+    try {
+        const response = await mutate.mutateAsync(data);
+        console.log('Dados enviados com sucesso:', response);  // Debug após sucesso
+
+        onSubmit(data);
+
+        // Resetar os campos
+        setTitle('');
+        setPrice('');
+        setImage('');
+        setDescription('');
+        setCategoriaGeral('salgado');
+        setCategoria('lanches');
     } catch (error) {
-      console.error('Erro ao enviar dados:', error);
+        console.error('Erro ao enviar dados:', error);  // Debug em caso de erro
     }
-  };
+};
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>

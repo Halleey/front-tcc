@@ -13,7 +13,6 @@ const Pedidos = () => {
             try {
                
                 const optionalData = await getAlternativePedido();
-                
                 const defaultData = await getPedidos();
 
              
