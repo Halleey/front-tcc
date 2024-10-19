@@ -48,8 +48,8 @@
 
 .cardButton {
   margin-top: 10px;
-  background-color: #6a09ac;
-  color: white; 
+  background-color: #d80303; 
+  color: white;
   border: none;
   padding: 10px 20px;
   border-radius: 5px; 
@@ -59,8 +59,8 @@
 }
 
 .cardButton:hover {
-  background-color: #e67e22;
-  box-shadow: 0 0 10px #ab3ee6;
+  background-color: #080808; 
+  box-shadow: 0 0 10px #888888; 
 }
 
 @media (max-width: 768px) {
