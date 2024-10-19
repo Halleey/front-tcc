@@ -38,8 +38,9 @@ export function Formulario({ onSubmit }) {
         setDescription('');
         setCategoriaGeral('salgado');
         setCategoria('lanches');
+        alert("Prato adicionado com êxito!");
     } catch (error) {
-        console.error('Erro ao enviar dados:', error);  // Debug em caso de erro
+        console.error('Erro ao enviar dados:', error); 
     }
 };
 

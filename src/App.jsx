@@ -5,6 +5,7 @@ import Tabela from './components/tabela';
 import { useQueryClient } from 'react-query';
 import CartPage from './routes/CartPage';
 import { CartProvider } from './hooks/CartProvider';
+
 function App() {
     const navigate = useNavigate();
     const queryClient = useQueryClient();

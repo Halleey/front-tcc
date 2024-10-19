@@ -11,9 +11,9 @@ const CartPage = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [hasProductPermission, setHasProductPermission] = useState(false);
   const [approvalUrl, setApprovalUrl] = useState(null);
-  const [showAddressInputs, setShowAddressInputs] = useState(false); 
-  const [optionalAddress, setOptionalAddress] = useState(''); 
-  const [optionalNumber, setOptionalNumber] = useState(''); 
+  const [showAddressInputs, setShowAddressInputs] = useState(false);
+  const [optionalAddress, setOptionalAddress] = useState('');
+  const [optionalNumber, setOptionalNumber] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -55,25 +55,28 @@ const CartPage = () => {
 
     setLoading(true);
     try {
-      console.log('dados enviados', {optionalAddress, optionalNumber});
-      const response = await axios.post('http://localhost:8080/api/paypal/create-payment', {
-        total: calculateTotal(),
-        currency: 'BRL',
-        method: 'paypal',
-        intent: 'sale',
-        description: 'Purchase from your store',
-        cancelUrl: 'http://localhost:5173/cart',
-        successUrl: 'http://localhost:5173/payment-complete',
-        userId: getUserIdFromToken(),
-        cartItems: cartItems,
-        optionalAddress, 
-        optionalNumber,   
-        
-      }, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+      console.log('dados enviados', { optionalAddress, optionalNumber });
+      const response = await axios.post(
+        'http://localhost:8080/api/paypal/create-payment',
+        {
+          total: calculateTotal(),
+          currency: 'BRL',
+          method: 'paypal',
+          intent: 'sale',
+          description: 'Purchase from your store',
+          cancelUrl: 'http://localhost:5173/cart',
+          successUrl: 'http://localhost:5173/payment-complete',
+          userId: getUserIdFromToken(),
+          cartItems: cartItems,
+          optionalAddress,
+          optionalNumber,
         },
-      });
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
 
       if (response.data && response.data.approvalUrl) {
         setApprovalUrl(response.data.approvalUrl);
@@ -102,7 +105,6 @@ const CartPage = () => {
     removeFromCart(itemId);
   };
 
-
   const toggleAddressInputs = () => {
     setShowAddressInputs((prev) => !prev);
   };
@@ -119,8 +121,8 @@ const CartPage = () => {
       ) : (
         <div>
           <ul>
-            {cartItems.map((item) => (
-              <li key={item.id}>
+            {cartItems.map((item, index) => (
+              <li key={`${item.id}-${index}`}>
                 <img src={item.image} alt={item.title} width="50" />
                 <h2>{item.title}</h2>
                 <p>{item.price}</p>
@@ -130,9 +132,10 @@ const CartPage = () => {
           </ul>
 
           <p className={styles.total}>Total: {calculateTotal()}</p>
-          <button className={styles.checkoutButton} onClick={createPayment}>Pagar com PayPal</button>
-          
-          
+          <button className={styles.checkoutButton} onClick={createPayment}>
+            Pagar com PayPal
+          </button>
+
           <button className={styles.addressButtozn} onClick={toggleAddressInputs}>
             Tem um endereço diferente?
           </button>
@@ -163,7 +166,9 @@ const CartPage = () => {
       {approvalUrl && (
         <div>
           <p>Clique para proceder para o pagamento</p>
-          <button className={styles.checkoutButton} onClick={redirectToPayPal}>Ir para o PayPal</button>
+          <button className={styles.checkoutButton} onClick={redirectToPayPal}>
+            Ir para o PayPal
+          </button>
         </div>
       )}
     </div>
