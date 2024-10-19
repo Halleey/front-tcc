@@ -11,71 +11,59 @@
   text-align: center;
 }
 
-@keyframes colorChange {
-  0% { color: #ff6347; } 
-  25% { color: #ff4500; } 
-  50% { color: #ffd700; } 
-  75% { color: #32cd32; } 
-  100% { color: #4682b4; } 
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(26, 26, 26, 0.9);
+  padding: 10px 20px;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  flex-wrap: wrap; 
+}
+
+header .btnsPrimary {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
 }
 
 h1 {
   font-size: 2em;
   margin: 20px 0;
-  animation: colorChange 5s infinite; 
-}
-
-.btnsPrimary {
-  display: flex;
-  flex-direction: row; 
-  gap: 10px;
-  margin-bottom: 20px;
-  align-items: center;
-  flex-wrap: wrap;
+  animation: colorChange 5s infinite;
+  padding-top: 80px; 
 }
 
 .btnsPrimary button, 
 .btnsPrimary select {
   padding: 10px 20px;
-  background-color: #6a09ac;
+  background-color: #000000; 
   color: white;
-  border: none;
   border-radius: 20px;
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  margin-bottom: 10px;
+  margin: 5px 0; 
 }
 
 .btnsPrimary button:hover {
-  background-color: #d35400; 
-  box-shadow: 0 0 10px #ab3ee6; 
+  background-color: #555555; 
+  box-shadow: 0 0 10px #888888; 
 }
 
 .btnsPrimary select {
-  padding: 10px;
-  background-color: #6a09ac;
-  color: white;
-  border: 1px solid #ccc; 
-  border-radius: 20px;
-  font-size: 16px;
-  transition: background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+  border: 1px solid #ccc;
 }
 
 .btnsPrimary select:focus {
-  background-color: #6b7986; 
-  border-color: #7a0bad; 
-}
-
-@media (max-width: 1024px) {
-  h1 {
-    font-size: 1.75em;
-  }
-
-  .btnsPrimary {
-    gap: 15px;
-    justify-content: center;
-  }
+  background-color: #333333; 
 }
 
 @media (max-width: 768px) {
@@ -83,14 +71,20 @@ h1 {
     font-size: 1.5em;
   }
 
-  .btnsPrimary {
+  header {
     flex-direction: column;
+    align-items: center;
+    padding: 10px 15px;
+  }
+
+  .btnsPrimary {
+    width: 100%; 
+    justify-content: space-evenly; 
   }
 
   .btnsPrimary button,
   .btnsPrimary select {
-    width: 80%;
-    margin-bottom: 15px;
+    width: auto;
   }
 }
 
@@ -99,12 +93,18 @@ h1 {
     font-size: 1.2em;
   }
 
+  header {
+    padding: 10px 10px;
+  }
+
   .btnsPrimary {
-    gap: 10px;
+    gap: 5px; 
+    justify-content: space-around; 
+    flex-direction: row; 
   }
 
   .btnsPrimary button,
   .btnsPrimary select {
-    width: 90%;
+    width: 45%; 
   }
 }

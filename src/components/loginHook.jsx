@@ -19,6 +19,10 @@ export function LoginForm() {
         navigate('/recuperar'); 
     };
 
+    const handleRegister = () => {
+        navigate('/cadastro')
+    };
+
     const submit = async (event) => {
         event.preventDefault();
         try {
@@ -67,9 +71,13 @@ export function LoginForm() {
                     <button type="button" onClick={handleAlterPassword} className={styles['btn-secondary']}>
                         Esqueceu a senha?...
                     </button>
+                    <button type="button" onClick={handleRegister} className={styles['btn-secondary']}>
+                        Criar uma conta
+                    </button>
                     <button type="button" onClick={handleReturnHome} className={styles['btn-secondary']}>
                         Voltar para Home
                     </button>
+
                 </form>
             )}
         </div>
