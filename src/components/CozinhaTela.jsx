@@ -79,6 +79,11 @@ const Pedidos = () => {
 
     const handleSendEmail = async (email) => {
         try {
+            const confirmSend = window.confirm("Você realmente deseja enviar o e-mail de finalização?");
+            if (!confirmSend) {
+                return; // Se o usuário cancelar, a função para aqui.
+            }
+    
             const token = localStorage.getItem('token');
             if (!token) {
                 throw new Error("Usuário não autenticado");
@@ -103,10 +108,13 @@ const Pedidos = () => {
         }
     };
     
+    
 
     return (
         <div className={styles['pedidos-container']}>
             <h2>Pedidos do Cliente</h2>
+
+
             <ul className={styles['pedidos-list']}>
                 {Object.keys(pedidosAgrupados).map((cliente) => {
                     const pedidosDoCliente = pedidosAgrupados[cliente];
