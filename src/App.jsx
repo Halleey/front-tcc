@@ -55,9 +55,8 @@ function App() {
 
     return (
         <div className={styles.App}>
-            <h1>Mesa digital</h1>
+       
             <header>
-   
             <div className={styles.btnsPrimary}>
                 <Link to="/cart">
                     <button>
