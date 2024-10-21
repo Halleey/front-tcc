@@ -20,7 +20,7 @@ export function LoginForm() {
     };
 
     const handleRegister = () => {
-        navigate('/cadastro')
+        navigate('/register')
     };
 
     const submit = async (event) => {

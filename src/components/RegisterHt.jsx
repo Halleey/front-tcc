@@ -9,11 +9,10 @@ function RegisterHt({ onSubmit }) {
   const [address, setAddress] = useState('');
   const [number, setNumber] = useState('');
   const [city, setCity] = useState('');
-  const [reference, setReference] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit({ name, lastName, password, email, address, number, city, reference });
+    onSubmit({ name, lastName, password, email, address, number, city });
     
     setName('');
     setLastName('');
@@ -22,7 +21,6 @@ function RegisterHt({ onSubmit }) {
     setAddress('');
     setNumber('');
     setCity('');
-    setReference('');
   };
 
   return (
@@ -85,16 +83,7 @@ function RegisterHt({ onSubmit }) {
             onChange={(e) => setCity(e.target.value)}
           />
         </label>
-        <label style={{ color: '#ffffff' }}>
-          Referência:
-          <input
-            type='text'
-            value={reference}
-            onChange={(e) => setReference(e.target.value)}
-          />
-        </label>
-
-
+      
         <button type='submit'>Enviar</button>
       </form>
     </div>
