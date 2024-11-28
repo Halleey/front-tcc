@@ -125,7 +125,7 @@ const CartPage = () => {
               <li key={`${item.id}-${index}`}>
                 <img src={item.image} alt={item.title} width="50" />
                 <h2>{item.title}</h2>
-                <p>{item.price}</p>
+                <p>{item.price}R$</p>
                 <button onClick={() => handleRemoveFromCart(item.id)}>Remove</button>
               </li>
             ))}

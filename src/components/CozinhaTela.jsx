@@ -83,12 +83,12 @@ const Pedidos = () => {
             if (!confirmSend) {
                 return; // Se o usuário cancelar, a função para aqui.
             }
-    
+
             const token = localStorage.getItem('token');
             if (!token) {
                 throw new Error("Usuário não autenticado");
             }
-    
+
             // Fazendo a requisição com o parâmetro 'email' na URL
             const response = await fetch(`http://localhost:8080/public/alert?email=${email}`, {
                 method: 'POST',
@@ -97,23 +97,20 @@ const Pedidos = () => {
                     Authorization: `Bearer ${token}` // Inclui o token JWT
                 }
             });
-    
+
             if (!response.ok) {
                 throw new Error('Erro ao enviar e-mail.');
             }
-    
+
             alert('E-mail enviado com sucesso!');
         } catch (err) {
             alert('Erro ao enviar o e-mail: ' + err.message);
         }
     };
-    
-    
 
     return (
         <div className={styles['pedidos-container']}>
             <h2>Pedidos do Cliente</h2>
-
 
             <ul className={styles['pedidos-list']}>
                 {Object.keys(pedidosAgrupados).map((cliente) => {
@@ -130,7 +127,7 @@ const Pedidos = () => {
                                     <p><strong>Preço:</strong> {pedido.price}</p>
                                     <p><strong>Endereço:</strong> {pedido.userAddress}</p>
                                     <p><strong>Número:</strong> {pedido.userNumber}</p>
-
+                                    <p><strong>Horário:</strong> {new Date(pedido.localDateTime).toLocaleString()}</p> {/* Exibe o horário */}
                                     <div className={styles['pedido-actions']}>
                                         <button onClick={() => handleDelete(pedido.id)}>Excluir</button>
                                     </div>
